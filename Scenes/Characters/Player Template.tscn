@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://q8a2c3hpyhwq"]
+
+[ext_resource type="Texture2D" uid="uid://dx0u2eb7368gs" path="res://Imported Assets/32rogues-spriteset/rogues.png" id="1_kr64k"]
+[ext_resource type="Script" path="res://Scripts/Components/Mover.gd" id="2_7hqx1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iao1n"]
+
+[node name="Player" type="CharacterBody2D"]
+
+[node name="Character Sprite" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_kr64k")
+region_enabled = true
+region_rect = Rect2(0, 33, 25, 29)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_iao1n")
+
+[node name="Mover" type="Node" parent="."]
+script = ExtResource("2_7hqx1")

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://plr1vlnk6duk"]
+
+[ext_resource type="PackedScene" uid="uid://c4750awc1ab7v" path="res://Scenes/Dungeon.tscn" id="1_wx8s3"]
+
+[node name="Game" type="Node2D"]
+
+[node name="Dungeon" parent="." instance=ExtResource("1_wx8s3")]
