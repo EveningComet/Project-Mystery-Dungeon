@@ -21,6 +21,7 @@ func on_walker_finished(location_history: PackedVector2Array) -> void:
 	my_state_machine.set_walked_tiles( walked_tiles )
 	walked_tiles = my_state_machine.walked_tiles
 	
+	# TODO: Find a way that makes it so this delay is not needed.
 	await get_tree().create_timer(1.0).timeout
 	
 	# Generate the pathfinder
@@ -34,6 +35,7 @@ func on_walker_finished(location_history: PackedVector2Array) -> void:
 	var pos: Vector2 = tile_map.map_to_local( my_state_machine.walked_tiles[0] )
 	player.position = pos
 	my_state_machine.camera_controller.set_target( player )
+	my_state_machine.turn_controller.add_pawn( player.get_node("Pawn") )
 	
 	var astar: AStarGrid2D = my_state_machine.pathfinder.astar
 	var start = my_state_machine.tile_map.local_to_map( my_state_machine.walked_tiles[1] )
@@ -48,6 +50,7 @@ func on_walker_finished(location_history: PackedVector2Array) -> void:
 	friendly.set_pathfinder( my_state_machine.pathfinder )
 	friendly.set_player( player )
 	ally.global_position = pos
+	my_state_machine.turn_controller.add_pawn( ally.get_node("Pawn") )
 	
 	# Generate the exit
 	var exit = test_exit.instantiate()
@@ -55,3 +58,6 @@ func on_walker_finished(location_history: PackedVector2Array) -> void:
 	var final_pos = walked_tiles[walked_tiles.size() - 1]
 	exit.position = my_state_machine.tile_map.map_to_local(final_pos)
 	print("GenerateDungeon :: Exit spawned at coords: ", final_pos)
+	
+	# Everything is done, start the player's turn
+	my_state_machine.turn_controller.next_pawn()

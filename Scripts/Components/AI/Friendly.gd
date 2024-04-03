@@ -1,4 +1,4 @@
-extends Node
+class_name FriendlyBrain extends Node
 
 ## The current character the player is controlling.
 var player: Node2D
@@ -12,8 +12,7 @@ func set_pathfinder(new_pathfinder: Pathfinder) -> void:
 func set_player(new_player: Node2D) -> void:
 	player = new_player
 
-func _physics_process(delta):
-	# TODO: This is testing code to make the ai follow the player. Delete when no longer needed.
+func operate() -> void:
 	if player != null:
 		path = pathfinder.astar.get_id_path(
 			pathfinder.tile_map.local_to_map( get_parent().global_position ), 
@@ -22,11 +21,17 @@ func _physics_process(delta):
 		
 		path.pop_front()
 		if path.size() == 1:
+			get_parent().get_node("Pawn").finished_turn.emit(null)
 			return
 		
 		if path.is_empty() == true:
+			get_parent().get_node("Pawn").finished_turn.emit(null)
 			return
 		
 		var p = pathfinder.tile_map.map_to_local(path[0])
 		
-		get_parent().global_position = get_parent().global_position.move_toward(p, 1)
+		var target_pos: Vector2 = pathfinder.tile_map.map_to_local( p )
+		var tween: Tween = create_tween()
+		tween.tween_property(get_parent(), "global_position", p, 0.2).set_trans(Tween.TRANS_LINEAR)
+		await tween.finished
+		get_parent().get_node("Pawn").finished_turn.emit(null)

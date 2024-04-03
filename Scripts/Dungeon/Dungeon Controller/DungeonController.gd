@@ -15,6 +15,8 @@ class_name DungeonController extends StateMachine
 
 @export var camera_controller: CameraController
 
+@export var turn_controller: TurnController
+
 ## The stored tiles of the walker so that the dungeon can do things with it.
 var walked_tiles: PackedVector2Array = []
 

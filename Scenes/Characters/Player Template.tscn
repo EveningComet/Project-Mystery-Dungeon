@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://q8a2c3hpyhwq"]
+[gd_scene load_steps=5 format=3 uid="uid://q8a2c3hpyhwq"]
 
 [ext_resource type="Texture2D" uid="uid://dx0u2eb7368gs" path="res://Imported Assets/32rogues-spriteset/rogues.png" id="1_kr64k"]
 [ext_resource type="Script" path="res://Scripts/Components/Mover.gd" id="2_7hqx1"]
+[ext_resource type="Script" path="res://Scripts/Pawn/Pawn.gd" id="3_ftylo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iao1n"]
 
@@ -19,3 +20,6 @@ shape = SubResource("RectangleShape2D_iao1n")
 
 [node name="Mover" type="Node" parent="."]
 script = ExtResource("2_7hqx1")
+
+[node name="Pawn" type="Node" parent="."]
+script = ExtResource("3_ftylo")

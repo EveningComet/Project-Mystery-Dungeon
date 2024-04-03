@@ -13,12 +13,13 @@ var inputs: Dictionary = {
 	"move_left": Vector2.LEFT
 }
 
-
-
 func set_tile_map(new_map: TileMap) -> void:
 	tile_map = new_map
 
 func _unhandled_input(event: InputEvent) -> void:
+	if get_parent().get_node("Pawn").my_turn == false:
+		return
+	
 	if is_moving == true:
 		return
 	
@@ -35,3 +36,4 @@ func _unhandled_input(event: InputEvent) -> void:
 				tween.tween_property(get_parent(), "global_position", target_pos, 0.2).set_trans(Tween.TRANS_LINEAR)
 				await tween.finished
 				is_moving = false
+				get_parent().get_node("Pawn").finished_turn.emit(null)
