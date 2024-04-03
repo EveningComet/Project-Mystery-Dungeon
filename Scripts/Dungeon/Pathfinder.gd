@@ -9,16 +9,18 @@ var astar: AStarGrid2D = AStarGrid2D.new()
 
 ## Generate the needed data for pathfinding.
 func initialize_pathfinding() -> void:
-	astar.region = tile_map.get_used_rect()
+	var tile_map_size = tile_map.get_used_rect().end - tile_map.get_used_rect().position
+	astar.region    = tile_map.get_used_rect()
 	astar.cell_size = tile_map.tile_set.tile_size
 	
-	astar.default_compute_heuristic = AStarGrid2D.HEURISTIC_MANHATTAN
+	astar.default_compute_heuristic  = AStarGrid2D.HEURISTIC_MANHATTAN
 	astar.default_estimate_heuristic = AStarGrid2D.HEURISTIC_MANHATTAN
 	astar.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_ALWAYS
 	astar.update()
 	
+	print("Pathfinder :: ", tile_map.get_used_rect())
+	
 	# Check which nodes are walkable
-	var tile_map_size = tile_map.get_used_rect().end - tile_map.get_used_rect().position
 	for x in tile_map_size.x:
 		for y in tile_map_size.y:
 			var coords: Vector2i = Vector2i(x, y)

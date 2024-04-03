@@ -15,8 +15,8 @@ func set_player(new_player: Node2D) -> void:
 func _physics_process(delta):
 	# TODO: This is testing code to make the ai follow the player. Delete when no longer needed.
 	if player != null:
-		var path = pathfinder.astar.get_id_path(
-			pathfinder.tile_map.local_to_map( get_parent().global_position),
+		path = pathfinder.astar.get_id_path(
+			pathfinder.tile_map.local_to_map( get_parent().global_position ), 
 			pathfinder.tile_map.local_to_map( player.global_position )
 		)
 		
@@ -27,7 +27,6 @@ func _physics_process(delta):
 		if path.is_empty() == true:
 			return
 		
-		var original_position: Vector2 = get_parent().global_position
 		var p = pathfinder.tile_map.map_to_local(path[0])
 		
 		get_parent().global_position = get_parent().global_position.move_toward(p, 1)

@@ -7,6 +7,8 @@ extends GaeaGenerator2D
 ## @tutorial(WalkerGenerator): https://benjatk.github.io/Gaea/#/generators/walker
 ## @tutorial(Gaea's Getting Started tutorial): https://benjatk.github.io/Gaea/#/tutorials/getting_started
 
+## Used so that the game can keep track of what tiles are usable.
+signal walker_finished(location_history: PackedVector2Array)
 
 class Walker:
 	var pos = Vector2.ZERO
@@ -89,7 +91,10 @@ func _generate_floor() -> void:
 
 	for tile in _walked_tiles:
 		grid.set_value(tile, settings.tile)
-
+	
+	# Tell the dungeon about the usable tiles
+	walker_finished.emit( _walked_tiles )
+	
 	_walkers.clear()
 	_walked_tiles.clear()
 
