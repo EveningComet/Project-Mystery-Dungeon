@@ -44,7 +44,7 @@ func spawn_player_party() -> void:
 	player.get_node("Mover").set_pawn( player.get_node("Pawn") )
 	var pos: Vector2 = tile_map.map_to_local( my_state_machine.walked_tiles[0] )
 	player.position = pos
-	my_state_machine.turn_controller.add_pawn( player.get_node("Pawn") )
+	EventBus.character_spawned_in_dungeon.emit( player.get_node("Pawn") )
 	
 	# Set the player's current pawn to be the one we just created
 	my_state_machine.player_dungeon_controller.set_current_pawn( player.get_node("Pawn") )
@@ -59,7 +59,7 @@ func spawn_player_party() -> void:
 	friendly.set_player( player )
 	ally.global_position = pos
 	ally.get_node("Mover").set_pawn( ally.get_node("Pawn") )
-	my_state_machine.turn_controller.add_pawn( ally.get_node("Pawn") )
+	EventBus.character_spawned_in_dungeon.emit( ally.get_node("Pawn") )
 
 func spawn_enemies() -> void:
 	# Genereate a test enemy
@@ -71,7 +71,7 @@ func spawn_enemies() -> void:
 	var enemy_brain: EnemyBrain = EnemyBrain.new()
 	enemy_brain.name = "EnemyBrain"
 	enemy.add_child( enemy_brain )
-	my_state_machine.turn_controller.add_pawn( enemy.get_node("Pawn") )
+	EventBus.character_spawned_in_dungeon.emit( enemy.get_node("Pawn") )
 
 func spawn_exit() -> void:
 	# Generate the exit

@@ -13,6 +13,10 @@ var curr_pawn: Pawn = null
 
 func _ready() -> void:
 	EventBus.hp_depleted.connect( on_pawn_hp_depleted )
+	EventBus.character_spawned_in_dungeon.connect( on_pawn_spawned )
+
+func on_pawn_spawned(new_pawn: Pawn) -> void:
+	add_pawn( new_pawn )
 
 func next_pawn() -> void:
 	curr_pawn = turn_queue.pop_front()
