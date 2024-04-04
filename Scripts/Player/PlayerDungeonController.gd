@@ -33,7 +33,7 @@ func _unhandled_input(event) -> void:
 				if curr_pawn.ray.get_collider().has_node("FactionOwner"):
 					var t = curr_pawn.ray.get_collider().get_node("FactionOwner")
 					if my_faction_owner.faction_type == FactionOwner.FactionType.PartyMember and t.faction_type == FactionOwner.FactionType.Enemy:
-						curr_pawn.ray.get_collider().get_node("Stats").die()
+						curr_pawn.ray.get_collider().get_node("Stats").take_damage( 50 )
 						curr_pawn.finished_turn.emit(null)
 						return
 			
