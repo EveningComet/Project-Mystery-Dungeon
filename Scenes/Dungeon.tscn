@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://c4750awc1ab7v"]
+[gd_scene load_steps=27 format=3 uid="uid://c4750awc1ab7v"]
 
 [ext_resource type="Script" path="res://Scripts/Player/CameraController.gd" id="1_hy0sl"]
 [ext_resource type="Script" path="res://addons/gaea/generators/2D/walker_generator/walker_generator.gd" id="1_jk5ye"]
@@ -14,9 +14,12 @@
 [ext_resource type="Script" path="res://Scripts/Dungeon/Dungeon Controller/DC States/GenerateDungeon.gd" id="9_aangx"]
 [ext_resource type="PackedScene" uid="uid://q8a2c3hpyhwq" path="res://Scenes/Characters/Player Template.tscn" id="9_hk5gu"]
 [ext_resource type="PackedScene" uid="uid://o3iblyhcftgw" path="res://Scenes/Characters/Ally Template.tscn" id="10_5qicd"]
+[ext_resource type="PackedScene" uid="uid://2ch8sntks6kk" path="res://Scenes/Characters/Character Template.tscn" id="11_jeiyu"]
 [ext_resource type="Script" path="res://Scripts/Dungeon/Pathfinder.gd" id="11_o3ny8"]
 [ext_resource type="Script" path="res://Scripts/Dungeon/TurnController.gd" id="16_8vqvc"]
+[ext_resource type="Script" path="res://Scripts/Dungeon/Dungeon Controller/DC States/DungeonRunning.gd" id="16_ah4ou"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerDungeonController.gd" id="17_juqlf"]
+[ext_resource type="Script" path="res://Scripts/Dungeon/DeathHandler.gd" id="20_4bkj3"]
 
 [sub_resource type="Resource" id="Resource_62wv1"]
 script = ExtResource("3_s0is7")
@@ -109,28 +112,41 @@ layer_2/y_sort_enabled = true
 layer_2/y_sort_origin = 5
 layer_2/tile_data = PackedInt32Array()
 
-[node name="DungeonController" type="Node" parent="." node_paths=PackedStringArray("walker_generator", "tile_map", "pathfinder", "camera_controller", "turn_controller")]
+[node name="DungeonController" type="Node" parent="." node_paths=PackedStringArray("walker_generator", "tile_map", "pathfinder", "camera_controller", "turn_controller", "player_dungeon_controller", "death_handler")]
 script = ExtResource("8_xukfm")
 walker_generator = NodePath("../WalkerGenerator")
+character_template = ExtResource("11_jeiyu")
 player_template = ExtResource("9_hk5gu")
 ally_template = ExtResource("10_5qicd")
 tile_map = NodePath("../TileMap")
 pathfinder = NodePath("../Pathfinder")
 camera_controller = NodePath("../CameraController")
 turn_controller = NodePath("../TurnController")
+player_dungeon_controller = NodePath("../PlayerDungeonController")
+death_handler = NodePath("../DeathHandler")
 initial_state = NodePath("GenerateDungeon")
 
 [node name="GenerateDungeon" type="Node" parent="DungeonController"]
 script = ExtResource("9_aangx")
 test_exit = ExtResource("3_cq828")
 
+[node name="DungeonRunning" type="Node" parent="DungeonController"]
+script = ExtResource("16_ah4ou")
+
+[node name="DeathHandler" type="Node" parent="."]
+script = ExtResource("20_4bkj3")
+
 [node name="Pathfinder" type="Node" parent="." node_paths=PackedStringArray("tile_map")]
 script = ExtResource("11_o3ny8")
 tile_map = NodePath("../TileMap")
 
-[node name="TurnController" type="Node" parent="."]
+[node name="TurnController" type="Node" parent="." node_paths=PackedStringArray("death_handler")]
 script = ExtResource("16_8vqvc")
+death_handler = NodePath("../DeathHandler")
 
-[node name="PlayerDungeonController" type="Node" parent="." node_paths=PackedStringArray("camera_controller")]
+[node name="PlayerDungeonController" type="Node" parent="." node_paths=PackedStringArray("camera_controller", "tile_map")]
 script = ExtResource("17_juqlf")
 camera_controller = NodePath("../CameraController")
+tile_map = NodePath("../TileMap")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]

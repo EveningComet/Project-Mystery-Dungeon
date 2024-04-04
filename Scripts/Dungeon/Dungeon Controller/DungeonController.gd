@@ -4,6 +4,8 @@ class_name DungeonController extends StateMachine
 ## The object responsible for generating our map.
 @export var walker_generator: WalkerGenerator
 
+@export var character_template: PackedScene
+
 @export var player_template: PackedScene
 
 @export var ally_template: PackedScene
@@ -16,6 +18,10 @@ class_name DungeonController extends StateMachine
 @export var camera_controller: CameraController
 
 @export var turn_controller: TurnController
+
+@export var player_dungeon_controller: PlayerDungeonController
+
+@export var death_handler: DeathHandler
 
 ## The stored tiles of the walker so that the dungeon can do things with it.
 var walked_tiles: PackedVector2Array = []

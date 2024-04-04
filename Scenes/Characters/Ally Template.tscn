@@ -1,8 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://o3iblyhcftgw"]
+[gd_scene load_steps=8 format=3 uid="uid://o3iblyhcftgw"]
 
 [ext_resource type="Texture2D" uid="uid://dx0u2eb7368gs" path="res://Imported Assets/32rogues-spriteset/rogues.png" id="1_5bifk"]
 [ext_resource type="Script" path="res://Scripts/Components/AI/Friendly.gd" id="2_3rhss"]
 [ext_resource type="Script" path="res://Scripts/Pawn/Pawn.gd" id="3_pa7b5"]
+[ext_resource type="Script" path="res://Scripts/Components/FactionOwner.gd" id="4_27g5r"]
+[ext_resource type="Script" path="res://Scripts/Components/Character Stats/PlayerCharacterStats.gd" id="5_7wae2"]
+[ext_resource type="Script" path="res://Scripts/Components/Mover.gd" id="6_gbxp7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0kkr1"]
 
@@ -11,8 +14,9 @@
 [node name="Character Sprite" type="Sprite2D" parent="."]
 texture_filter = 1
 texture = ExtResource("1_5bifk")
-region_enabled = true
-region_rect = Rect2(67, 67, 29, 28)
+hframes = 8
+vframes = 8
+frame = 18
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4)
@@ -21,5 +25,18 @@ shape = SubResource("RectangleShape2D_0kkr1")
 [node name="Friendly" type="Node" parent="."]
 script = ExtResource("2_3rhss")
 
-[node name="Pawn" type="Node" parent="."]
+[node name="Pawn" type="Node" parent="." node_paths=PackedStringArray("ray")]
 script = ExtResource("3_pa7b5")
+ray = NodePath("../RayCast2D")
+
+[node name="FactionOwner" type="Node" parent="."]
+script = ExtResource("4_27g5r")
+
+[node name="Stats" type="Node" parent="."]
+script = ExtResource("5_7wae2")
+
+[node name="Mover" type="Node" parent="."]
+script = ExtResource("6_gbxp7")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, 16)

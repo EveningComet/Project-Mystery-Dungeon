@@ -1,6 +1,8 @@
 ## Keeps track of what character should be allowed to do anything at a given time.
 class_name TurnController extends Node
 
+@export var death_handler: DeathHandler
+
 ## The current characters in the game world.
 var current_entities: Array[Pawn] = []
 
@@ -9,21 +11,31 @@ var turn_queue: Array[Pawn] = []
 ## The current character's turn.
 var curr_pawn: Pawn = null
 
+func _ready() -> void:
+	EventBus.hp_depleted.connect( on_pawn_hp_depleted )
+
 func next_pawn() -> void:
 	curr_pawn = turn_queue.pop_front()
 	curr_pawn.finished_turn.connect( on_pawn_turn_finished )
 	curr_pawn.toggle_active()
+	
+	# TODO: Cleanup friendly brain
 	if curr_pawn.get_parent().has_node("Friendly"):
 		var friendly = curr_pawn.get_parent().get_node("Friendly")
 		friendly.operate()
+	
+	elif curr_pawn.get_parent().has_node("EnemyBrain"):
+		curr_pawn.get_parent().get_node("EnemyBrain").operate()
 
 func add_pawn(new_pawn: Pawn) -> void:
 	current_entities.append( new_pawn )
 	turn_queue.append( new_pawn )
 
 func remove_pawn(pawn_to_remove: Pawn) -> void:
-	current_entities.erase( pawn_to_remove )
-	turn_queue.erase( pawn_to_remove )
+	if current_entities.has(pawn_to_remove) == true:
+		current_entities.erase( pawn_to_remove )
+	if turn_queue.has(pawn_to_remove) == true:
+		turn_queue.erase( pawn_to_remove )
 
 func on_pawn_turn_finished(action: Action) -> void:
 	curr_pawn.finished_turn.disconnect( on_pawn_turn_finished )
@@ -32,3 +44,7 @@ func on_pawn_turn_finished(action: Action) -> void:
 		turn_queue.append_array( current_entities )
 	
 	next_pawn()
+
+func on_pawn_hp_depleted(stats: Stats) -> void:
+	var dead_pawn: Pawn = stats.get_parent().get_node("Pawn")
+	remove_pawn( dead_pawn )

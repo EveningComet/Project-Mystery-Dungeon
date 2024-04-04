@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://2ch8sntks6kk"]
+
+[ext_resource type="Texture2D" uid="uid://diihmm2175j50" path="res://Imported Assets/32rogues-spriteset/monsters.png" id="1_woy7e"]
+[ext_resource type="Script" path="res://Scripts/Components/Character Stats/EnemyStats.gd" id="2_msf37"]
+[ext_resource type="Script" path="res://Scripts/Components/FactionOwner.gd" id="2_nscjc"]
+[ext_resource type="Script" path="res://Scripts/Pawn/Pawn.gd" id="4_0jw07"]
+[ext_resource type="Script" path="res://Scripts/Components/Mover.gd" id="5_2yf1f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7blc1"]
+
+[node name="Character Template" type="CharacterBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_7blc1")
+
+[node name="Character Sprite" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_woy7e")
+hframes = 8
+vframes = 8
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, 16)
+
+[node name="Stats" type="Node" parent="."]
+script = ExtResource("2_msf37")
+
+[node name="FactionOwner" type="Node" parent="."]
+script = ExtResource("2_nscjc")
+faction_type = 1
+
+[node name="Pawn" type="Node" parent="." node_paths=PackedStringArray("ray")]
+script = ExtResource("4_0jw07")
+ray = NodePath("../RayCast2D")
+
+[node name="Mover" type="Node" parent="."]
+script = ExtResource("5_2yf1f")

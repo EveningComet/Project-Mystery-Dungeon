@@ -18,7 +18,8 @@ func initialize_pathfinding() -> void:
 	astar.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_ALWAYS
 	astar.update()
 	
-	print("Pathfinder :: ", tile_map.get_used_rect())
+	if OS.is_debug_build() == true:
+		print("Pathfinder :: ", tile_map.get_used_rect())
 	
 	# Check which nodes are walkable
 	for x in tile_map_size.x:

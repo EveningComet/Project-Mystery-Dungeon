@@ -29,9 +29,4 @@ func operate() -> void:
 			return
 		
 		var p = pathfinder.tile_map.map_to_local(path[0])
-		
-		var target_pos: Vector2 = pathfinder.tile_map.map_to_local( p )
-		var tween: Tween = create_tween()
-		tween.tween_property(get_parent(), "global_position", p, 0.2).set_trans(Tween.TRANS_LINEAR)
-		await tween.finished
-		get_parent().get_node("Pawn").finished_turn.emit(null)
+		get_parent().get_node("Mover").move( p )
