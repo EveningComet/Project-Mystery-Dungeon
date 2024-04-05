@@ -17,6 +17,10 @@ var inputs: Dictionary = {
 func _unhandled_input(event) -> void:
 	if curr_pawn == null or curr_pawn.my_turn == false:
 		return
+		
+	if curr_pawn.ground_interactable_standing_over != null and event.is_action_pressed("ui_accept"):
+		EventBus.player_activated_exit.emit()
+		return
 	
 	# Handling of movement
 	for dir in inputs.keys():

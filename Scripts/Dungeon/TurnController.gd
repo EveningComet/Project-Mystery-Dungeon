@@ -1,11 +1,10 @@
 ## Keeps track of what character should be allowed to do anything at a given time.
 class_name TurnController extends Node
 
-@export var death_handler: DeathHandler
-
 ## The current characters in the game world.
 var current_entities: Array[Pawn] = []
 
+## The order of the characters.
 var turn_queue: Array[Pawn] = []
 
 ## The current character's turn.
@@ -23,7 +22,6 @@ func next_pawn() -> void:
 	curr_pawn.finished_turn.connect( on_pawn_turn_finished )
 	curr_pawn.toggle_active()
 	
-	# TODO: Cleanup friendly brain
 	if curr_pawn.get_parent().has_node("FriendlyBrain"):
 		var friendly = curr_pawn.get_parent().get_node("FriendlyBrain")
 		friendly.operate()

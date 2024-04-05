@@ -6,3 +6,4 @@ func _ready() -> void:
 
 func on_pawn_hp_depleted(stats: Stats) -> void:
 	stats.get_parent().queue_free()
+	# TODO: If the character belongs to the player, remove them from the party.

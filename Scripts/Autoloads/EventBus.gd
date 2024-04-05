@@ -8,3 +8,6 @@ signal hp_depleted(stats: Stats)
 signal character_spawned_in_dungeon(character: Pawn)
 
 signal character_added_to_party(new_pm: PlayerCharacterStats)
+
+## For when the player activated the exit and wants to proceed to the next floor.
+signal player_activated_exit

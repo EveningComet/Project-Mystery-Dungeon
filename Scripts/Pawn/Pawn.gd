@@ -9,8 +9,13 @@ signal finished_turn(action: Action)
 var tile_map: TileMap
 var my_turn: bool = false
 
+var ground_interactable_standing_over: InteractableOnGround = null
+
 func set_tile_map(new_tm: TileMap) -> void:
 	tile_map = new_tm
+
+func set_interactable_standing_over(ground_interactable: InteractableOnGround) -> void:
+	ground_interactable_standing_over = ground_interactable
 
 func toggle_active() -> void:
 	my_turn = !my_turn

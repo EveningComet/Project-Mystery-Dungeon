@@ -28,18 +28,25 @@ func on_walker_finished(location_history: PackedVector2Array) -> void:
 	my_state_machine.pathfinder.initialize_pathfinding()
 	
 	spawn_player_party()
+	spawn_potential_party_members()
 	spawn_enemies()
 	spawn_exit()
 	spawn_items()
 	
+	# Set the current pawn for the player
+	# TODO: Set this properly for floor transitions.
+	my_state_machine.player_dungeon_controller.set_current_pawn(
+		PlayerPartyController.party_members[0]
+	)
+	
 	# Everything is done, start the player's turn
 	my_state_machine.turn_controller.next_pawn()
+	PlayerPartyController.party_members[0].my_turn = true
 	my_state_machine.change_to_state("DungeonRunning")
 
 func spawn_player_party() -> void:
 	# Setup the player characters
-	var pos: Vector2 = tile_map.map_to_local( my_state_machine.walked_tiles[0] )
-	var player: Node2D = null
+	var i: int = 0
 	for party_member in PlayerPartyController.get_children():
 		party_member.reparent( tile_map )
 		var stats: PlayerCharacterStats = party_member.get_node("Stats")
@@ -48,30 +55,31 @@ func spawn_player_party() -> void:
 		pawn.set_tile_map( tile_map )
 		var mover: Mover = party_member.get_node("Mover")
 		mover.set_pawn( pawn )
+		if party_member.has_node("FriendlyBrain") == true:
+			party_member.get_node("FriendlyBrain").set_pathfinder( my_state_machine.pathfinder )
+			party_member.get_node("FriendlyBrain").set_player( PlayerPartyController.party_members[0] )
 		
-		# Place them on the map
-		# TODO: Checks for making sure party members spawn near each other
+		# Attempt to place the party near one another
+		var pos: Vector2 = tile_map.map_to_local( my_state_machine.walked_tiles[i] )
 		party_member.global_position = pos
 		
 		# Notify anything that needs to know about the spawning
 		EventBus.character_spawned_in_dungeon.emit( pawn )
-	
-	# Set the current pawn for the player
-	# TODO: Set this properly for floor transitions.
-	my_state_machine.player_dungeon_controller.set_current_pawn(
-		PlayerPartyController.party_members[0]
-	)
-	
+		i += 1
+
+func spawn_potential_party_members() -> void:
+	# TODO: Random chance for generation.
 	# Generating a test ally that can join the player
 	var ally = my_state_machine.character_template.instantiate()
 	ally.get_node("FactionOwner").set_faction_type( FactionOwner.FactionType.Neutral )
 	tile_map.add_child(ally)
-	pos = tile_map.map_to_local( my_state_machine.walked_tiles[1] )
+	var pos = tile_map.map_to_local( my_state_machine.walked_tiles[2] )
 	ally.global_position = pos
 	var friendly: FriendlyBrain = FriendlyBrain.new()
 	friendly.name = "FriendlyBrain"
 	ally.add_child(friendly)
 	var pawn: Pawn = ally.get_node("Pawn")
+	pawn.set_tile_map( tile_map )
 	friendly.set_pathfinder( my_state_machine.pathfinder )
 	ally.get_node("Mover").set_pawn( pawn )
 	var stats: PlayerCharacterStats = PlayerCharacterStats.new()
@@ -103,13 +111,13 @@ func spawn_enemies() -> void:
 	EventBus.character_spawned_in_dungeon.emit( enemy.get_node("Pawn") )
 
 func spawn_exit() -> void:
-	# Generate the exit
-	var exit = test_exit.instantiate()
-	tile_map.add_child( exit )
+	# Generate the dungeon exit
+	var dungeon_exit = test_exit.instantiate()
+	tile_map.add_child( dungeon_exit )
 	var walked_tiles = my_state_machine.walked_tiles
 	# TODO: Randomize the tile for the exit.
 	var final_pos    = walked_tiles[walked_tiles.size() - 1]
-	exit.global_position = tile_map.map_to_local(final_pos)
+	dungeon_exit.global_position = tile_map.map_to_local(final_pos)
 	
 	if OS.is_debug_build() == true:
 		print("GenerateDungeon :: Exit spawned at coords: ", final_pos)

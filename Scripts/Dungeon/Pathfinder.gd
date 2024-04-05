@@ -13,13 +13,12 @@ func initialize_pathfinding() -> void:
 	astar.region    = tile_map.get_used_rect()
 	astar.cell_size = tile_map.tile_set.tile_size
 	
-	astar.default_compute_heuristic  = AStarGrid2D.HEURISTIC_MANHATTAN
-	astar.default_estimate_heuristic = AStarGrid2D.HEURISTIC_MANHATTAN
-	astar.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_ALWAYS
-	astar.update()
+	astar.default_compute_heuristic  = AStarGrid2D.HEURISTIC_OCTILE
+	astar.default_estimate_heuristic = AStarGrid2D.HEURISTIC_OCTILE
+	#astar.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_ONLY_IF_NO_OBSTACLES
 	
-	if OS.is_debug_build() == true:
-		print("Pathfinder :: ", tile_map.get_used_rect())
+	# TODO: Figure out diagonal movement without having characters go through walls.
+	astar.update()
 	
 	# Check which nodes are walkable
 	for x in tile_map_size.x:

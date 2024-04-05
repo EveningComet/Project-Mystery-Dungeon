@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cn1nurp7ed2dy"]
+
+[ext_resource type="Texture2D" uid="uid://dh43qis6l620f" path="res://Imported Assets/32rogues-spriteset/animals.png" id="1_6jr4c"]
+[ext_resource type="Script" path="res://Scripts/Dungeon/InteractableOnGround.gd" id="1_ni8pc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y6tmy"]
+
+[node name="Exit" type="Area2D"]
+script = ExtResource("1_ni8pc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_y6tmy")
+
+[node name="Exit Sprite" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_6jr4c")
+hframes = 8
+vframes = 16
+frame = 10
