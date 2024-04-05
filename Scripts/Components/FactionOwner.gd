@@ -9,3 +9,6 @@ enum FactionType
 }
 
 @export var faction_type: FactionType
+
+func set_faction_type(faction_to_set: FactionType) -> void:
+	faction_type = faction_to_set

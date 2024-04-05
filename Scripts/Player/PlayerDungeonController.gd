@@ -29,13 +29,25 @@ func _unhandled_input(event) -> void:
 			
 			curr_pawn.update_raycast( inputs[dir] )
 			if curr_pawn.ray.is_colliding() == true:
+				var col = curr_pawn.ray.get_collider()
 				var my_faction_owner: FactionOwner = curr_pawn.get_parent().get_node("FactionOwner")
 				if curr_pawn.ray.get_collider().has_node("FactionOwner"):
 					var t = curr_pawn.ray.get_collider().get_node("FactionOwner")
+					
+					# See if it's an enemy
 					if my_faction_owner.faction_type == FactionOwner.FactionType.PartyMember and t.faction_type == FactionOwner.FactionType.Enemy:
-						curr_pawn.ray.get_collider().get_node("Stats").take_damage( 50 )
+						col.get_node("Stats").take_damage( 50 )
 						curr_pawn.finished_turn.emit(null)
 						return
+					
+					# See if it's a potential ally
+					if t.faction_type == FactionOwner.FactionType.Neutral and col.has_node("Stats"):
+						if PlayerPartyController.get_child_count() < PlayerPartyController.MAX_RECRUITED_PARTY_SIZE and col.get_node("Stats") is PlayerCharacterStats:
+							col.reparent(PlayerPartyController) # TODO: Better adding of party members. Adding as children is dumb.
+							EventBus.character_added_to_party.emit( col.get_node("Stats") )
+							col.get_node("FriendlyBrain").set_player( curr_pawn )
+							col.get_node("FactionOwner").set_faction_type(FactionOwner.FactionType.PartyMember)
+							return
 			
 			# If we can move to the position, go for it
 			if tile_data != null and tile_data.get_custom_data("Type") != "Impassable":

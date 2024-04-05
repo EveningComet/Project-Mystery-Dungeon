@@ -37,37 +37,53 @@ func on_walker_finished(location_history: PackedVector2Array) -> void:
 	my_state_machine.change_to_state("DungeonRunning")
 
 func spawn_player_party() -> void:
-	# Generate the player
-	var player = my_state_machine.player_template.instantiate()
-	my_state_machine.tile_map.add_child(player)
-	player.get_node("Pawn").set_tile_map( tile_map )
-	player.get_node("Mover").set_pawn( player.get_node("Pawn") )
+	# Setup the player characters
 	var pos: Vector2 = tile_map.map_to_local( my_state_machine.walked_tiles[0] )
-	player.position = pos
-	player.get_node("Stats").initialize()
-	EventBus.character_spawned_in_dungeon.emit( player.get_node("Pawn") )
+	var player: Node2D = null
+	for party_member in PlayerPartyController.get_children():
+		var stats: PlayerCharacterStats = party_member.get_node("Stats")
+		my_state_machine.player_dungeon_hud.create_display_for_pm( stats )
+		var pawn: Pawn = party_member.get_node("Pawn")
+		pawn.set_tile_map( tile_map )
+		var mover: Mover = party_member.get_node("Mover")
+		mover.set_pawn( pawn )
+		
+		# Place them on the map
+		# TODO: Checks for making sure party members spawn near each other
+		party_member.global_position = pos
+		
+		# Notify anything that needs to know about the spawning
+		EventBus.character_spawned_in_dungeon.emit( pawn )
+		pass
 	
-	# Create the UI for the player
-	my_state_machine.player_dungeon_hud.create_display_for_pm( player.get_node("Stats") )
-	
-	# Set the player's current pawn to be the one we just created
-	my_state_machine.player_dungeon_controller.set_current_pawn( player.get_node("Pawn") )
-	my_state_machine.player_dungeon_controller
-	
-	# Generate a test ally
-	var ally = my_state_machine.ally_template.instantiate()
+	# Set the current pawn for the player
+	# TODO: Set this properly for floor transitions.
+	my_state_machine.player_dungeon_controller.set_current_pawn(
+		PlayerPartyController.get_child(0).get_node("Pawn")
+	)
+	# Generating a test ally that can join the player
+	var ally = my_state_machine.character_template.instantiate()
+	ally.get_node("FactionOwner").set_faction_type( FactionOwner.FactionType.Neutral )
 	tile_map.add_child(ally)
 	pos = tile_map.map_to_local( my_state_machine.walked_tiles[1] )
-	var friendly = ally.get_node("Friendly")
-	friendly.set_pathfinder( my_state_machine.pathfinder )
-	friendly.set_player( player )
 	ally.global_position = pos
-	ally.get_node("Mover").set_pawn( ally.get_node("Pawn") )
-	ally.get_node("Stats").initialize()
-	EventBus.character_spawned_in_dungeon.emit( ally.get_node("Pawn") )
-	
-	# Create the UI for the ally
-	my_state_machine.player_dungeon_hud.create_display_for_pm( ally.get_node("Stats") )
+	var friendly: FriendlyBrain = FriendlyBrain.new()
+	friendly.name = "FriendlyBrain"
+	ally.add_child(friendly)
+	var pawn: Pawn = ally.get_node("Pawn")
+	friendly.set_pathfinder( my_state_machine.pathfinder )
+	ally.get_node("Mover").set_pawn( pawn )
+	var stats: PlayerCharacterStats = PlayerCharacterStats.new()
+	stats.name = "Stats"
+	stats.initialize()
+	ally.add_child( stats )
+	var texture = preload("res://Imported Assets/32rogues-spriteset/rogues.png")
+	var sprite: Sprite2D = ally.get_node("Character Sprite")
+	sprite.set_texture( texture )
+	sprite.hframes = 8
+	sprite.vframes = 8
+	sprite.frame   = 18
+	EventBus.character_spawned_in_dungeon.emit( pawn )
 
 func spawn_enemies() -> void:
 	# Genereate a test enemy
@@ -79,7 +95,10 @@ func spawn_enemies() -> void:
 	var enemy_brain: EnemyBrain = EnemyBrain.new()
 	enemy_brain.name = "EnemyBrain"
 	enemy.add_child( enemy_brain )
-	enemy.get_node("Stats").initialize()
+	var enemy_stats: EnemyStats = EnemyStats.new()
+	enemy_stats.name = "Stats"
+	enemy_stats.initialize()
+	enemy.add_child(enemy_stats)
 	EventBus.character_spawned_in_dungeon.emit( enemy.get_node("Pawn") )
 
 func spawn_exit() -> void:

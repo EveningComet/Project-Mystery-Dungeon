@@ -24,8 +24,8 @@ func next_pawn() -> void:
 	curr_pawn.toggle_active()
 	
 	# TODO: Cleanup friendly brain
-	if curr_pawn.get_parent().has_node("Friendly"):
-		var friendly = curr_pawn.get_parent().get_node("Friendly")
+	if curr_pawn.get_parent().has_node("FriendlyBrain"):
+		var friendly = curr_pawn.get_parent().get_node("FriendlyBrain")
 		friendly.operate()
 	
 	elif curr_pawn.get_parent().has_node("EnemyBrain"):

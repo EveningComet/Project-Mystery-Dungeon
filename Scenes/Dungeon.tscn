@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://c4750awc1ab7v"]
+[gd_scene load_steps=26 format=3 uid="uid://c4750awc1ab7v"]
 
 [ext_resource type="Script" path="res://Scripts/Player/CameraController.gd" id="1_hy0sl"]
 [ext_resource type="Script" path="res://addons/gaea/generators/2D/walker_generator/walker_generator.gd" id="1_jk5ye"]
@@ -12,8 +12,6 @@
 [ext_resource type="TileSet" uid="uid://b4reh0vqljbro" path="res://Tilesets/KenneyNL Tiny Dungeon.tres" id="8_sxclt"]
 [ext_resource type="Script" path="res://Scripts/Dungeon/Dungeon Controller/DungeonController.gd" id="8_xukfm"]
 [ext_resource type="Script" path="res://Scripts/Dungeon/Dungeon Controller/DC States/GenerateDungeon.gd" id="9_aangx"]
-[ext_resource type="PackedScene" uid="uid://q8a2c3hpyhwq" path="res://Scenes/Characters/Player Template.tscn" id="9_hk5gu"]
-[ext_resource type="PackedScene" uid="uid://o3iblyhcftgw" path="res://Scenes/Characters/Ally Template.tscn" id="10_5qicd"]
 [ext_resource type="PackedScene" uid="uid://2ch8sntks6kk" path="res://Scenes/Characters/Character Template.tscn" id="11_jeiyu"]
 [ext_resource type="Script" path="res://Scripts/Dungeon/Pathfinder.gd" id="11_o3ny8"]
 [ext_resource type="Script" path="res://Scripts/Dungeon/TurnController.gd" id="16_8vqvc"]
@@ -117,8 +115,6 @@ layer_2/tile_data = PackedInt32Array()
 script = ExtResource("8_xukfm")
 walker_generator = NodePath("../WalkerGenerator")
 character_template = ExtResource("11_jeiyu")
-player_template = ExtResource("9_hk5gu")
-ally_template = ExtResource("10_5qicd")
 tile_map = NodePath("../TileMap")
 pathfinder = NodePath("../Pathfinder")
 camera_controller = NodePath("../CameraController")

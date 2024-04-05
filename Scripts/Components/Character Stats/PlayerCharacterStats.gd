@@ -11,6 +11,9 @@ var total_experience_points: int = 0
 ## points are required for the next level up.
 const EXPERIENCE_GROWTH_PERCENTAGE: float = 1.10
 
+func set_char_name(new_name: String) -> void:
+	char_name = new_name
+
 ## Return how much experience is required for this character to level up.
 ## Calculation is: 100 * (growth_percent^( current level - 1))
 func get_experience_required(level: int) -> int:

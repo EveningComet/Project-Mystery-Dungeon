@@ -8,6 +8,7 @@ class_name PlayerDungeonHUD extends Control
 @export var party_container_node: Control
 
 func _ready() -> void:
+	EventBus.character_added_to_party.connect( on_character_added_to_party )
 	if party_container_node.get_child_count() > 0:
 		clear_party_display()
 
@@ -19,3 +20,6 @@ func create_display_for_pm(new_pm: PlayerCharacterStats) -> void:
 func clear_party_display() -> void:
 	for c in party_container_node.get_children():
 		c.queue_free()
+
+func on_character_added_to_party(new_pm: PlayerCharacterStats) -> void:
+	create_display_for_pm(new_pm)
