@@ -44,4 +44,5 @@ func create_player() -> void:
 	sprite.vframes = 8
 	sprite.frame   = 8
 	
+	PlayerPartyController.add_party_member( player.get_node("Pawn") )
 	PlayerPartyController.add_child( player )

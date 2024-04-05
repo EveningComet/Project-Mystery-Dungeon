@@ -41,6 +41,7 @@ func spawn_player_party() -> void:
 	var pos: Vector2 = tile_map.map_to_local( my_state_machine.walked_tiles[0] )
 	var player: Node2D = null
 	for party_member in PlayerPartyController.get_children():
+		party_member.reparent( tile_map )
 		var stats: PlayerCharacterStats = party_member.get_node("Stats")
 		my_state_machine.player_dungeon_hud.create_display_for_pm( stats )
 		var pawn: Pawn = party_member.get_node("Pawn")
@@ -54,13 +55,13 @@ func spawn_player_party() -> void:
 		
 		# Notify anything that needs to know about the spawning
 		EventBus.character_spawned_in_dungeon.emit( pawn )
-		pass
 	
 	# Set the current pawn for the player
 	# TODO: Set this properly for floor transitions.
 	my_state_machine.player_dungeon_controller.set_current_pawn(
-		PlayerPartyController.get_child(0).get_node("Pawn")
+		PlayerPartyController.party_members[0]
 	)
+	
 	# Generating a test ally that can join the player
 	var ally = my_state_machine.character_template.instantiate()
 	ally.get_node("FactionOwner").set_faction_type( FactionOwner.FactionType.Neutral )

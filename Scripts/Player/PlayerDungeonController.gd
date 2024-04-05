@@ -7,9 +7,6 @@ class_name PlayerDungeonController extends Node
 ## The character the player is currently controlling.
 var curr_pawn: Pawn
 
-## The party members the player is controlling in the dungeon
-var party: Array[Pawn] = []
-
 var inputs: Dictionary = {
 	"move_up": Vector2.UP,
 	"move_right": Vector2.RIGHT,
@@ -42,8 +39,8 @@ func _unhandled_input(event) -> void:
 					
 					# See if it's a potential ally
 					if t.faction_type == FactionOwner.FactionType.Neutral and col.has_node("Stats"):
-						if PlayerPartyController.get_child_count() < PlayerPartyController.MAX_RECRUITED_PARTY_SIZE and col.get_node("Stats") is PlayerCharacterStats:
-							col.reparent(PlayerPartyController) # TODO: Better adding of party members. Adding as children is dumb.
+						if PlayerPartyController.get_party_count() < PlayerPartyController.MAX_RECRUITED_PARTY_SIZE and col.get_node("Stats") is PlayerCharacterStats:
+							PlayerPartyController.add_party_member( col.get_node("Pawn") )
 							EventBus.character_added_to_party.emit( col.get_node("Stats") )
 							col.get_node("FriendlyBrain").set_player( curr_pawn )
 							col.get_node("FactionOwner").set_faction_type(FactionOwner.FactionType.PartyMember)
