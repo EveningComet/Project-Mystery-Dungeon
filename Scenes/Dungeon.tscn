@@ -83,7 +83,7 @@ modifiers = Array[Resource("res://addons/gaea/modifiers/2D/modifier_2d.gd")]([Su
 [node name="Dungeon" type="Node2D"]
 
 [node name="CameraController" type="Camera2D" parent="."]
-zoom = Vector2(2.5, 2.5)
+zoom = Vector2(3, 3)
 script = ExtResource("1_hy0sl")
 
 [node name="WalkerGenerator" type="Node" parent="."]
@@ -113,7 +113,7 @@ layer_2/y_sort_enabled = true
 layer_2/y_sort_origin = 5
 layer_2/tile_data = PackedInt32Array()
 
-[node name="DungeonController" type="Node" parent="." node_paths=PackedStringArray("walker_generator", "tile_map", "pathfinder", "camera_controller", "turn_controller", "player_dungeon_controller", "death_handler")]
+[node name="DungeonController" type="Node" parent="." node_paths=PackedStringArray("walker_generator", "tile_map", "pathfinder", "camera_controller", "turn_controller", "player_dungeon_controller", "player_dungeon_hud")]
 script = ExtResource("8_xukfm")
 walker_generator = NodePath("../WalkerGenerator")
 character_template = ExtResource("11_jeiyu")
@@ -124,7 +124,7 @@ pathfinder = NodePath("../Pathfinder")
 camera_controller = NodePath("../CameraController")
 turn_controller = NodePath("../TurnController")
 player_dungeon_controller = NodePath("../PlayerDungeonController")
-death_handler = NodePath("../DeathHandler")
+player_dungeon_hud = NodePath("../CanvasLayer/Player Dungeon HUD")
 initial_state = NodePath("GenerateDungeon")
 
 [node name="GenerateDungeon" type="Node" parent="DungeonController"]

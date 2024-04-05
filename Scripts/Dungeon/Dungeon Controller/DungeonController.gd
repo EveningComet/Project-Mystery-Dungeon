@@ -21,7 +21,7 @@ class_name DungeonController extends StateMachine
 
 @export var player_dungeon_controller: PlayerDungeonController
 
-@export var death_handler: DeathHandler
+@export var player_dungeon_hud: PlayerDungeonHUD
 
 ## The stored tiles of the walker so that the dungeon can do things with it.
 var walked_tiles: PackedVector2Array = []

@@ -47,6 +47,9 @@ func spawn_player_party() -> void:
 	player.get_node("Stats").initialize()
 	EventBus.character_spawned_in_dungeon.emit( player.get_node("Pawn") )
 	
+	# Create the UI for the player
+	my_state_machine.player_dungeon_hud.create_display_for_pm( player.get_node("Stats") )
+	
 	# Set the player's current pawn to be the one we just created
 	my_state_machine.player_dungeon_controller.set_current_pawn( player.get_node("Pawn") )
 	my_state_machine.player_dungeon_controller
@@ -62,6 +65,9 @@ func spawn_player_party() -> void:
 	ally.get_node("Mover").set_pawn( ally.get_node("Pawn") )
 	ally.get_node("Stats").initialize()
 	EventBus.character_spawned_in_dungeon.emit( ally.get_node("Pawn") )
+	
+	# Create the UI for the ally
+	my_state_machine.player_dungeon_hud.create_display_for_pm( ally.get_node("Stats") )
 
 func spawn_enemies() -> void:
 	# Genereate a test enemy

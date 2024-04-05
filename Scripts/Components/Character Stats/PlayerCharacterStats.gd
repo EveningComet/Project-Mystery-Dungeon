@@ -1,5 +1,7 @@
 class_name PlayerCharacterStats extends Stats
 
+var char_name: String = "New Friend"
+
 var curr_level:              int = 1
 var curr_experience_points:  int = 0
 var experience_required:     int = get_experience_required( curr_level )
