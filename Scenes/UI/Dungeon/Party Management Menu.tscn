@@ -1,0 +1,64 @@
+[gd_scene load_steps=5 format=3 uid="uid://d0mwmkx0w2t2s"]
+
+[ext_resource type="Script" path="res://Scripts/UI/Dungeon/PartyManagementMenu.gd" id="1_1jupw"]
+[ext_resource type="PackedScene" uid="uid://b5eoxtkj86gjh" path="res://Scenes/UI/Inventory/Equipment Menu.tscn" id="2_5yiap"]
+[ext_resource type="PackedScene" uid="uid://cbqjryn2o1did" path="res://Scenes/UI/Inventory/Player Inventory Menu.tscn" id="2_kbq44"]
+[ext_resource type="PackedScene" uid="uid://drlx36ts20j8m" path="res://Scenes/UI/Dungeon/Character Stats Menu.tscn" id="4_jt5ht"]
+
+[node name="Party Management Menu" type="Control" node_paths=PackedStringArray("equipment_menu_holder", "character_stats_menu", "player_inventory_ui")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1jupw")
+equipment_menu_template = ExtResource("2_5yiap")
+equipment_menu_holder = NodePath("Equipment Menu Holder")
+character_stats_menu = NodePath("Character Stats Menu")
+player_inventory_ui = NodePath("Player Inventory Menu")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.372549)
+
+[node name="Equipment Menu Holder" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 263.0
+offset_top = -120.0
+offset_right = 303.0
+offset_bottom = -80.0
+grow_vertical = 2
+
+[node name="Player Inventory Menu" parent="." instance=ExtResource("2_kbq44")]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -881.0
+offset_top = -461.0
+offset_right = -281.0
+offset_bottom = -61.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Character Stats Menu" parent="." instance=ExtResource("4_jt5ht")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -966.0
+offset_top = 200.0
+offset_right = -366.0
+offset_bottom = 500.0
+grow_horizontal = 0

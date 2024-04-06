@@ -6,4 +6,5 @@ func _ready() -> void:
 
 func on_pawn_hp_depleted(stats: Stats) -> void:
 	stats.get_parent().queue_free()
+	# TODO: Give experience to the party if it was an enemy that died.
 	# TODO: If the character belongs to the player, remove them from the party.

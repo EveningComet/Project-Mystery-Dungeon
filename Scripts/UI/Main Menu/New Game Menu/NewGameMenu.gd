@@ -23,7 +23,11 @@ func on_start_button_pressed() -> void:
 		return
 	
 	create_player()
+	initialize_new_game_inventory()
 	SceneController.switch_to_scene( dungeon_scene )
+
+func initialize_new_game_inventory() -> void:
+	PlayerInventory.initialize_slots()
 
 ## Create the player character once they're done entering everything.
 func create_player() -> void:

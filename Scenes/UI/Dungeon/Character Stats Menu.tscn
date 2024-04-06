@@ -1,0 +1,49 @@
+[gd_scene load_steps=2 format=3 uid="uid://drlx36ts20j8m"]
+
+[ext_resource type="Script" path="res://Scripts/UI/Dungeon/CharacterStatsMenu.gd" id="1_g3n5q"]
+
+[node name="Character Stats Menu" type="Control"]
+custom_minimum_size = Vector2(600, 300)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_g3n5q")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Attributes Container" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 10
+
+[node name="Level" type="Label" parent="PanelContainer/MarginContainer/Attributes Container"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Level: 1"
+
+[node name="Vitality" type="Label" parent="PanelContainer/MarginContainer/Attributes Container"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Vitality: 10"
+
+[node name="Expertise" type="Label" parent="PanelContainer/MarginContainer/Attributes Container"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Expertise: 10"
+
+[node name="Will" type="Label" parent="PanelContainer/MarginContainer/Attributes Container"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Will: 10"

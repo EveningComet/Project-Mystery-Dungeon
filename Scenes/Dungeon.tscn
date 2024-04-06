@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://c4750awc1ab7v"]
+[gd_scene load_steps=28 format=3 uid="uid://c4750awc1ab7v"]
 
 [ext_resource type="Script" path="res://Scripts/Player/CameraController.gd" id="1_hy0sl"]
 [ext_resource type="Script" path="res://addons/gaea/generators/2D/walker_generator/walker_generator.gd" id="1_jk5ye"]
@@ -19,7 +19,8 @@
 [ext_resource type="Script" path="res://Scripts/Dungeon/Dungeon Controller/DC States/DungeonRunning.gd" id="16_ah4ou"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerDungeonController.gd" id="17_juqlf"]
 [ext_resource type="Script" path="res://Scripts/Dungeon/DeathHandler.gd" id="20_4bkj3"]
-[ext_resource type="PackedScene" uid="uid://bdmomd3ugv8mm" path="res://Scenes/UI/Player Dungeon HUD.tscn" id="21_ww2of"]
+[ext_resource type="PackedScene" uid="uid://bdmomd3ugv8mm" path="res://Scenes/UI/Dungeon/Player Dungeon HUD.tscn" id="21_ww2of"]
+[ext_resource type="PackedScene" uid="uid://d0mwmkx0w2t2s" path="res://Scenes/UI/Dungeon/Party Management Menu.tscn" id="22_gmn44"]
 
 [sub_resource type="Resource" id="Resource_62wv1"]
 script = ExtResource("3_s0is7")
@@ -145,11 +146,14 @@ tile_map = NodePath("../TileMap")
 [node name="TurnController" type="Node" parent="."]
 script = ExtResource("16_8vqvc")
 
-[node name="PlayerDungeonController" type="Node" parent="." node_paths=PackedStringArray("camera_controller", "tile_map")]
+[node name="PlayerDungeonController" type="Node" parent="." node_paths=PackedStringArray("camera_controller", "tile_map", "party_management_menu")]
 script = ExtResource("17_juqlf")
 camera_controller = NodePath("../CameraController")
 tile_map = NodePath("../TileMap")
+party_management_menu = NodePath("../CanvasLayer/Party Management Menu")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Player Dungeon HUD" parent="CanvasLayer" instance=ExtResource("21_ww2of")]
+
+[node name="Party Management Menu" parent="CanvasLayer" instance=ExtResource("22_gmn44")]

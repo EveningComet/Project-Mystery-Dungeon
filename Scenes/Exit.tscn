@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://Scripts/Dungeon/InteractableOnGround.gd" id="1_ni8pc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y6tmy"]
+size = Vector2(2, 2)
 
 [node name="Exit" type="Area2D"]
 script = ExtResource("1_ni8pc")

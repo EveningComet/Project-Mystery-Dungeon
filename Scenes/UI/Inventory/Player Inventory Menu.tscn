@@ -1,0 +1,279 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbqjryn2o1did"]
+
+[ext_resource type="Script" path="res://Scripts/Inventory/InventoryDisplayer.gd" id="1_rts78"]
+[ext_resource type="PackedScene" uid="uid://ekcu645grfsj" path="res://Scenes/UI/Inventory/Item Slot UI.tscn" id="2_iae1e"]
+
+[node name="Player Inventory Menu" type="Control" node_paths=PackedStringArray("grid_container")]
+custom_minimum_size = Vector2(675, 400)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_rts78")
+item_slot_prefab = ExtResource("2_iae1e")
+grid_container = NodePath("PanelContainer/MarginContainer/ItemGrid")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -10.0
+offset_right = 10.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="ItemGrid" type="GridContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 5
+theme_override_constants/v_separation = 5
+columns = 10
+
+[node name="Item Slot UI" parent="PanelContainer/MarginContainer/ItemGrid" instance=ExtResource("2_iae1e")]
+layout_mode = 2
+
+[node name="Item Slot UI2" parent="PanelContainer/MarginContainer/ItemGrid" node_paths=PackedStringArray("icon", "amount_label") instance=ExtResource("2_iae1e")]
+layout_mode = 2
+icon = NodePath("../Item Slot UI/MarginContainer/Icon")
+amount_label = NodePath("../Item Slot UI/Amount")
+
+[node name="Item Slot UI3" parent="PanelContainer/MarginContainer/ItemGrid" node_paths=PackedStringArray("icon", "amount_label") instance=ExtResource("2_iae1e")]
+layout_mode = 2
+icon = NodePath("../Item Slot UI/MarginContainer/Icon")
+amount_label = NodePath("../Item Slot UI/Amount")
+
+[node name="Item Slot UI4" parent="PanelContainer/MarginContainer/ItemGrid" node_paths=PackedStringArray("icon", "amount_label") instance=ExtResource("2_iae1e")]
+layout_mode = 2
+icon = NodePath("../Item Slot UI/MarginContainer/Icon")
+amount_label = NodePath("../Item Slot UI/Amount")
+
+[node name="Item Slot UI5" parent="PanelContainer/MarginContainer/ItemGrid" node_paths=PackedStringArray("icon", "amount_label") instance=ExtResource("2_iae1e")]
+layout_mode = 2
+icon = NodePath("../Item Slot UI/MarginContainer/Icon")
+amount_label = NodePath("../Item Slot UI/Amount")
+
+[node name="Item Slot UI6" parent="PanelContainer/MarginContainer/ItemGrid" node_paths=PackedStringArray("icon", "amount_label") instance=ExtResource("2_iae1e")]
+layout_mode = 2
+icon = NodePath("../Item Slot UI/MarginContainer/Icon")
+amount_label = NodePath("../Item Slot UI/Amount")
+
+[node name="Item Slot UI7" parent="PanelContainer/MarginContainer/ItemGrid" node_paths=PackedStringArray("icon", "amount_label") instance=ExtResource("2_iae1e")]
+layout_mode = 2
+icon = NodePath("../Item Slot UI/MarginContainer/Icon")
+amount_label = NodePath("../Item Slot UI/Amount")
+
+[node name="Item Slot UI8" parent="PanelContainer/MarginContainer/ItemGrid" node_paths=PackedStringArray("icon", "amount_label") instance=ExtResource("2_iae1e")]
+layout_mode = 2
+icon = NodePath("../Item Slot UI/MarginContainer/Icon")
+amount_label = NodePath("../Item Slot UI/Amount")
+
+[node name="Item Slot UI9" parent="PanelContainer/MarginContainer/ItemGrid" node_paths=PackedStringArray("icon", "amount_label") instance=ExtResource("2_iae1e")]
+layout_mode = 2
+icon = NodePath("../Item Slot UI/MarginContainer/Icon")
+amount_label = NodePath("../Item Slot UI/Amount")
+
+[node name="Item Slot UI10" parent="PanelContainer/MarginContainer/ItemGrid" node_paths=PackedStringArray("icon", "amount_label") instance=ExtResource("2_iae1e")]
+layout_mode = 2
+icon = NodePath("../Item Slot UI/MarginContainer/Icon")
+amount_label = NodePath("../Item Slot UI/Amount")
+
+[node name="Item Slot UI11" parent="PanelContainer/MarginContainer/ItemGrid" node_paths=PackedStringArray("icon", "amount_label") instance=ExtResource("2_iae1e")]
+layout_mode = 2
+icon = NodePath("../Item Slot UI/MarginContainer/Icon")
+amount_label = NodePath("../Item Slot UI/Amount")
+
+[node name="Item Slot UI12" parent="PanelContainer/MarginContainer/ItemGrid" node_paths=PackedStringArray("icon", "amount_label") instance=ExtResource("2_iae1e")]
+layout_mode = 2
+icon = NodePath("../Item Slot UI/MarginContainer/Icon")
+amount_label = NodePath("../Item Slot UI/Amount")
+
+[node name="Item Slot UI13" parent="PanelContainer/MarginContainer/ItemGrid" node_paths=PackedStringArray("icon", "amount_label") instance=ExtResource("2_iae1e")]
+layout_mode = 2
+icon = NodePath("../Item Slot UI/MarginContainer/Icon")
+amount_label = NodePath("../Item Slot UI/Amount")
+
+[node name="Item Slot UI14" parent="PanelContainer/MarginContainer/ItemGrid" node_paths=PackedStringArray("icon", "amount_label") instance=ExtResource("2_iae1e")]
+layout_mode = 2
+icon = NodePath("../Item Slot UI/MarginContainer/Icon")
+amount_label = NodePath("../Item Slot UI/Amount")
+
+[node name="Item Slot UI15" parent="PanelContainer/MarginContainer/ItemGrid" node_paths=PackedStringArray("icon", "amount_label") instance=ExtResource("2_iae1e")]
+layout_mode = 2
+icon = NodePath("../Item Slot UI/MarginContainer/Icon")
+amount_label = NodePath("../Item Slot UI/Amount")
+
+[node name="Item Slot UI16" parent="PanelContainer/MarginContainer/ItemGrid" node_paths=PackedStringArray("icon", "amount_label") instance=ExtResource("2_iae1e")]
+layout_mode = 2
+icon = NodePath("../Item Slot UI/MarginContainer/Icon")
+amount_label = NodePath("../Item Slot UI/Amount")
+
+[node name="Item Slot UI17" parent="PanelContainer/MarginContainer/ItemGrid" node_paths=PackedStringArray("icon", "amount_label") instance=ExtResource("2_iae1e")]
+layout_mode = 2
+icon = NodePath("../Item Slot UI/MarginContainer/Icon")
+amount_label = NodePath("../Item Slot UI/Amount")
+
+[node name="Item Slot UI18" parent="PanelContainer/MarginContainer/ItemGrid" node_paths=PackedStringArray("icon", "amount_label") instance=ExtResource("2_iae1e")]
+layout_mode = 2
+icon = NodePath("../Item Slot UI/MarginContainer/Icon")
+amount_label = NodePath("../Item Slot UI/Amount")
+
+[node name="Item Slot UI19" parent="PanelContainer/MarginContainer/ItemGrid" node_paths=PackedStringArray("icon", "amount_label") instance=ExtResource("2_iae1e")]
+layout_mode = 2
+icon = NodePath("../Item Slot UI/MarginContainer/Icon")
+amount_label = NodePath("../Item Slot UI/Amount")
+
+[node name="Item Slot UI20" parent="PanelContainer/MarginContainer/ItemGrid" node_paths=PackedStringArray("icon", "amount_label") instance=ExtResource("2_iae1e")]
+layout_mode = 2
+icon = NodePath("../Item Slot UI/MarginContainer/Icon")
+amount_label = NodePath("../Item Slot UI/Amount")
+
+[node name="Item Slot UI21" parent="PanelContainer/MarginContainer/ItemGrid" node_paths=PackedStringArray("icon", "amount_label") instance=ExtResource("2_iae1e")]
+layout_mode = 2
+icon = NodePath("../Item Slot UI/MarginContainer/Icon")
+amount_label = NodePath("../Item Slot UI/Amount")
+
+[node name="Item Slot UI22" parent="PanelContainer/MarginContainer/ItemGrid" node_paths=PackedStringArray("icon", "amount_label") instance=ExtResource("2_iae1e")]
+layout_mode = 2
+icon = NodePath("../Item Slot UI/MarginContainer/Icon")
+amount_label = NodePath("../Item Slot UI/Amount")
+
+[node name="Item Slot UI23" parent="PanelContainer/MarginContainer/ItemGrid" node_paths=PackedStringArray("icon", "amount_label") instance=ExtResource("2_iae1e")]
+layout_mode = 2
+icon = NodePath("../Item Slot UI/MarginContainer/Icon")
+amount_label = NodePath("../Item Slot UI/Amount")
+
+[node name="Item Slot UI24" parent="PanelContainer/MarginContainer/ItemGrid" node_paths=PackedStringArray("icon", "amount_label") instance=ExtResource("2_iae1e")]
+layout_mode = 2
+icon = NodePath("../Item Slot UI/MarginContainer/Icon")
+amount_label = NodePath("../Item Slot UI/Amount")
+
+[node name="Item Slot UI25" parent="PanelContainer/MarginContainer/ItemGrid" node_paths=PackedStringArray("icon", "amount_label") instance=ExtResource("2_iae1e")]
+layout_mode = 2
+icon = NodePath("../Item Slot UI/MarginContainer/Icon")
+amount_label = NodePath("../Item Slot UI/Amount")
+
+[node name="Item Slot UI26" parent="PanelContainer/MarginContainer/ItemGrid" node_paths=PackedStringArray("icon", "amount_label") instance=ExtResource("2_iae1e")]
+layout_mode = 2
+icon = NodePath("../Item Slot UI/MarginContainer/Icon")
+amount_label = NodePath("../Item Slot UI/Amount")
+
+[node name="Item Slot UI27" parent="PanelContainer/MarginContainer/ItemGrid" node_paths=PackedStringArray("icon", "amount_label") instance=ExtResource("2_iae1e")]
+layout_mode = 2
+icon = NodePath("../Item Slot UI/MarginContainer/Icon")
+amount_label = NodePath("../Item Slot UI/Amount")
+
+[node name="Item Slot UI28" parent="PanelContainer/MarginContainer/ItemGrid" node_paths=PackedStringArray("icon", "amount_label") instance=ExtResource("2_iae1e")]
+layout_mode = 2
+icon = NodePath("../Item Slot UI/MarginContainer/Icon")
+amount_label = NodePath("../Item Slot UI/Amount")
+
+[node name="Item Slot UI29" parent="PanelContainer/MarginContainer/ItemGrid" node_paths=PackedStringArray("icon", "amount_label") instance=ExtResource("2_iae1e")]
+layout_mode = 2
+icon = NodePath("../Item Slot UI/MarginContainer/Icon")
+amount_label = NodePath("../Item Slot UI/Amount")
+
+[node name="Item Slot UI30" parent="PanelContainer/MarginContainer/ItemGrid" node_paths=PackedStringArray("icon", "amount_label") instance=ExtResource("2_iae1e")]
+layout_mode = 2
+icon = NodePath("../Item Slot UI/MarginContainer/Icon")
+amount_label = NodePath("../Item Slot UI/Amount")
+
+[node name="Item Slot UI31" parent="PanelContainer/MarginContainer/ItemGrid" node_paths=PackedStringArray("icon", "amount_label") instance=ExtResource("2_iae1e")]
+layout_mode = 2
+icon = NodePath("../Item Slot UI/MarginContainer/Icon")
+amount_label = NodePath("../Item Slot UI/Amount")
+
+[node name="Item Slot UI32" parent="PanelContainer/MarginContainer/ItemGrid" node_paths=PackedStringArray("icon", "amount_label") instance=ExtResource("2_iae1e")]
+layout_mode = 2
+icon = NodePath("../Item Slot UI/MarginContainer/Icon")
+amount_label = NodePath("../Item Slot UI/Amount")
+
+[node name="Item Slot UI33" parent="PanelContainer/MarginContainer/ItemGrid" node_paths=PackedStringArray("icon", "amount_label") instance=ExtResource("2_iae1e")]
+layout_mode = 2
+icon = NodePath("../Item Slot UI/MarginContainer/Icon")
+amount_label = NodePath("../Item Slot UI/Amount")
+
+[node name="Item Slot UI34" parent="PanelContainer/MarginContainer/ItemGrid" node_paths=PackedStringArray("icon", "amount_label") instance=ExtResource("2_iae1e")]
+layout_mode = 2
+icon = NodePath("../Item Slot UI/MarginContainer/Icon")
+amount_label = NodePath("../Item Slot UI/Amount")
+
+[node name="Item Slot UI35" parent="PanelContainer/MarginContainer/ItemGrid" node_paths=PackedStringArray("icon", "amount_label") instance=ExtResource("2_iae1e")]
+layout_mode = 2
+icon = NodePath("../Item Slot UI/MarginContainer/Icon")
+amount_label = NodePath("../Item Slot UI/Amount")
+
+[node name="Item Slot UI36" parent="PanelContainer/MarginContainer/ItemGrid" node_paths=PackedStringArray("icon", "amount_label") instance=ExtResource("2_iae1e")]
+layout_mode = 2
+icon = NodePath("../Item Slot UI/MarginContainer/Icon")
+amount_label = NodePath("../Item Slot UI/Amount")
+
+[node name="Item Slot UI37" parent="PanelContainer/MarginContainer/ItemGrid" node_paths=PackedStringArray("icon", "amount_label") instance=ExtResource("2_iae1e")]
+layout_mode = 2
+icon = NodePath("../Item Slot UI/MarginContainer/Icon")
+amount_label = NodePath("../Item Slot UI/Amount")
+
+[node name="Item Slot UI38" parent="PanelContainer/MarginContainer/ItemGrid" node_paths=PackedStringArray("icon", "amount_label") instance=ExtResource("2_iae1e")]
+layout_mode = 2
+icon = NodePath("../Item Slot UI/MarginContainer/Icon")
+amount_label = NodePath("../Item Slot UI/Amount")
+
+[node name="Item Slot UI39" parent="PanelContainer/MarginContainer/ItemGrid" node_paths=PackedStringArray("icon", "amount_label") instance=ExtResource("2_iae1e")]
+layout_mode = 2
+icon = NodePath("../Item Slot UI/MarginContainer/Icon")
+amount_label = NodePath("../Item Slot UI/Amount")
+
+[node name="Item Slot UI40" parent="PanelContainer/MarginContainer/ItemGrid" node_paths=PackedStringArray("icon", "amount_label") instance=ExtResource("2_iae1e")]
+layout_mode = 2
+icon = NodePath("../Item Slot UI/MarginContainer/Icon")
+amount_label = NodePath("../Item Slot UI/Amount")
+
+[node name="Item Slot UI41" parent="PanelContainer/MarginContainer/ItemGrid" node_paths=PackedStringArray("icon", "amount_label") instance=ExtResource("2_iae1e")]
+layout_mode = 2
+icon = NodePath("../Item Slot UI/MarginContainer/Icon")
+amount_label = NodePath("../Item Slot UI/Amount")
+
+[node name="Item Slot UI42" parent="PanelContainer/MarginContainer/ItemGrid" node_paths=PackedStringArray("icon", "amount_label") instance=ExtResource("2_iae1e")]
+layout_mode = 2
+icon = NodePath("../Item Slot UI/MarginContainer/Icon")
+amount_label = NodePath("../Item Slot UI/Amount")
+
+[node name="Item Slot UI43" parent="PanelContainer/MarginContainer/ItemGrid" node_paths=PackedStringArray("icon", "amount_label") instance=ExtResource("2_iae1e")]
+layout_mode = 2
+icon = NodePath("../Item Slot UI/MarginContainer/Icon")
+amount_label = NodePath("../Item Slot UI/Amount")
+
+[node name="Item Slot UI44" parent="PanelContainer/MarginContainer/ItemGrid" node_paths=PackedStringArray("icon", "amount_label") instance=ExtResource("2_iae1e")]
+layout_mode = 2
+icon = NodePath("../Item Slot UI/MarginContainer/Icon")
+amount_label = NodePath("../Item Slot UI/Amount")
+
+[node name="Item Slot UI45" parent="PanelContainer/MarginContainer/ItemGrid" node_paths=PackedStringArray("icon", "amount_label") instance=ExtResource("2_iae1e")]
+layout_mode = 2
+icon = NodePath("../Item Slot UI/MarginContainer/Icon")
+amount_label = NodePath("../Item Slot UI/Amount")
+
+[node name="Item Slot UI46" parent="PanelContainer/MarginContainer/ItemGrid" node_paths=PackedStringArray("icon", "amount_label") instance=ExtResource("2_iae1e")]
+layout_mode = 2
+icon = NodePath("../Item Slot UI/MarginContainer/Icon")
+amount_label = NodePath("../Item Slot UI/Amount")
+
+[node name="Item Slot UI47" parent="PanelContainer/MarginContainer/ItemGrid" node_paths=PackedStringArray("icon", "amount_label") instance=ExtResource("2_iae1e")]
+layout_mode = 2
+icon = NodePath("../Item Slot UI/MarginContainer/Icon")
+amount_label = NodePath("../Item Slot UI/Amount")
+
+[node name="Item Slot UI48" parent="PanelContainer/MarginContainer/ItemGrid" node_paths=PackedStringArray("icon", "amount_label") instance=ExtResource("2_iae1e")]
+layout_mode = 2
+icon = NodePath("../Item Slot UI/MarginContainer/Icon")
+amount_label = NodePath("../Item Slot UI/Amount")
+
+[node name="Item Slot UI49" parent="PanelContainer/MarginContainer/ItemGrid" node_paths=PackedStringArray("icon", "amount_label") instance=ExtResource("2_iae1e")]
+layout_mode = 2
+icon = NodePath("../Item Slot UI/MarginContainer/Icon")
+amount_label = NodePath("../Item Slot UI/Amount")

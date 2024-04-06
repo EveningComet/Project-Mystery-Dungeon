@@ -39,9 +39,9 @@ func on_walker_finished(location_history: PackedVector2Array) -> void:
 		PlayerPartyController.party_members[0]
 	)
 	
-	# Everything is done, start the player's turn
-	my_state_machine.turn_controller.next_pawn()
-	PlayerPartyController.party_members[0].my_turn = true
+	# The player can now start playing
+	EventBus.dungeon_finished_generating.emit()
+	
 	my_state_machine.change_to_state("DungeonRunning")
 
 func spawn_player_party() -> void:

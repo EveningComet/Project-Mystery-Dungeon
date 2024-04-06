@@ -1,8 +1,11 @@
 ## Manages the player in the dungeon controller.
 class_name PlayerDungeonController extends Node
+# TODO: This needs to be converted to a state machine.
 
 @export var camera_controller: CameraController
 @export var tile_map: TileMap
+
+@export var party_management_menu: PartyManagementMenu
 
 ## The character the player is currently controlling.
 var curr_pawn: Pawn
@@ -17,7 +20,15 @@ var inputs: Dictionary = {
 func _unhandled_input(event) -> void:
 	if curr_pawn == null or curr_pawn.my_turn == false:
 		return
-		
+	
+	if event.is_action_pressed("toggle_party_management_screen"):
+		party_management_menu.visible = !party_management_menu.visible
+	
+	# Do not allow any actions while the menu is open.
+	# TODO: Make it so that any menu is open?
+	if party_management_menu.visible == true:
+		return
+	
 	if curr_pawn.ground_interactable_standing_over != null and event.is_action_pressed("ui_accept"):
 		EventBus.player_activated_exit.emit()
 		return

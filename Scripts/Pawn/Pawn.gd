@@ -17,8 +17,8 @@ func set_tile_map(new_tm: TileMap) -> void:
 func set_interactable_standing_over(ground_interactable: InteractableOnGround) -> void:
 	ground_interactable_standing_over = ground_interactable
 
-func toggle_active() -> void:
-	my_turn = !my_turn
+func toggle_active(status: bool) -> void:
+	my_turn = status
 
 func update_raycast(direction: Vector2) -> void:
 	ray.target_position = direction * tile_map.tile_set.tile_size.x
