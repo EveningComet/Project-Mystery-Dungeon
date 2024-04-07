@@ -28,6 +28,13 @@ func on_start_button_pressed() -> void:
 
 func initialize_new_game_inventory() -> void:
 	PlayerInventory.initialize_slots()
+	
+	# Testing adding an item.
+	var test_item = load("res://Game Data/Items/Test Item.tres")
+	var slot_data: ItemSlotData = ItemSlotData.new()
+	slot_data.stored_item = test_item
+	slot_data.quantity = 50
+	PlayerInventory.add_singular_slot_data( slot_data )
 
 ## Create the player character once they're done entering everything.
 func create_player() -> void:

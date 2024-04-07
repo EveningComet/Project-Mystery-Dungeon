@@ -12,8 +12,6 @@ class_name DungeonController extends StateMachine
 
 @export var pathfinder: Pathfinder
 
-@export var camera_controller: CameraController
-
 @export var turn_controller: TurnController
 
 @export var player_dungeon_controller: PlayerDungeonController

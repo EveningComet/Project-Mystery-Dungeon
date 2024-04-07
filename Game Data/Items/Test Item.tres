@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://dcdxvr1nnb4yp"]
+
+[ext_resource type="Texture2D" uid="uid://30lsodk8uv7w" path="res://icon.svg" id="1_opn38"]
+[ext_resource type="Script" path="res://Scripts/Inventory/ItemData.gd" id="1_qstar"]
+
+[resource]
+script = ExtResource("1_qstar")
+localization_name = "Test Item"
+localization_description = "This is a test item."
+item_type = 0
+item_icon = ExtResource("1_opn38")
+max_stack_size = 99
+equip_type = 0
+weapon_type = 0
