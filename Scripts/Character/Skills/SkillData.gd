@@ -8,6 +8,10 @@ class_name SkillData extends Resource
 ## The description for this skill.
 @export_multiline var localization_description: String = "New description."
 
+## For skills that need a success chance, what is the base chance of succeeding?
+@export_range(0.0, 1.0) var success_chance: float = 1.0
+
+## Is the skill not activated?
 @export var is_passive: bool = false
 
 ## The effects that define what a skill does.

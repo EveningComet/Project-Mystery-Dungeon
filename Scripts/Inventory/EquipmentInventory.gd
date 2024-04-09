@@ -18,7 +18,7 @@ func initialize_slots() -> void:
 func drop_slot_data(grabbed_slot_data: ItemSlotData, index: int) -> ItemSlotData:
 	
 	if grabbed_slot_data.stored_item == null:
-		return null
+		return grabbed_slot_data
 	
 	# If something wants to place an item in us that is not a weapon, stop it
 	if grabbed_slot_data.stored_item.item_type != ItemTypes.ItemTypes.Equipment:
@@ -44,7 +44,7 @@ func drop_slot_data(grabbed_slot_data: ItemSlotData, index: int) -> ItemSlotData
 func drop_single_slot_data(grabbed_slot_data: ItemSlotData, index: int) -> ItemSlotData:
 	
 	if grabbed_slot_data.stored_item == null:
-		return
+		return grabbed_slot_data
 	
 	# If something wants to place an item in us that is not a weapon, stop it
 	if grabbed_slot_data.stored_item.item_type != ItemTypes.ItemTypes.Equipment:

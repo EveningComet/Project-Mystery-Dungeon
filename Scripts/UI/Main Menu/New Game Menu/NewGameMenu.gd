@@ -59,6 +59,11 @@ func create_player() -> void:
 	player.add_child(stats)
 	# TODO: Add friendly brain and disable it so that the player can switch between party members.
 	
+	# Apply the character class
+	# TODO: Proper setting of character class
+	var applied_class = load("res://Game Data/Character Classes/Classes/Generalist CD.tres")
+	stats.character_class = applied_class as CharacterClass
+	
 	# TODO: Proper sprite setting
 	var sprite: Sprite2D
 	sprite = player.get_node("Character Sprite")

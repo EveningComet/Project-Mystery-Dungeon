@@ -84,7 +84,8 @@ func spawn_potential_party_members() -> void:
 	ally.get_node("Mover").set_pawn( pawn )
 	var stats: PlayerCharacterStats = PlayerCharacterStats.new()
 	stats.name = "Stats"
-	stats.initialize()
+	var applied_class = load("res://Game Data/Character Classes/Classes/Holy Mage.tres")
+	stats.character_class = applied_class as CharacterClass
 	ally.add_child( stats )
 	var texture = preload("res://Imported Assets/32rogues-spriteset/rogues.png")
 	var sprite: Sprite2D = ally.get_node("Character Sprite")
@@ -106,7 +107,7 @@ func spawn_enemies() -> void:
 	enemy.add_child( enemy_brain )
 	var enemy_stats: EnemyStats = EnemyStats.new()
 	enemy_stats.name = "Stats"
-	enemy_stats.initialize()
+	enemy_stats.initialize_enemy( load("res://Game Data/Enemy Data/Trash Enemy.tres") )
 	enemy.add_child(enemy_stats)
 	EventBus.character_spawned_in_dungeon.emit( enemy.get_node("Pawn") )
 

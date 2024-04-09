@@ -17,8 +17,7 @@ func advance_to_next_floor() -> void:
 	for party_member in PlayerPartyController.party_members:
 		party_member.get_parent().reparent( PlayerPartyController )
 	
-	my_state_machine.turn_controller.turn_queue.clear()
-	my_state_machine.turn_controller.current_entities.clear()
+	EventBus.advancing_to_next_floor.emit()
 	tile_map.clear()
 	
 	SceneController.switch_to_scene( dungeon_scene )

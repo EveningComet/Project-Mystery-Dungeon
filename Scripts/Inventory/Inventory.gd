@@ -29,10 +29,12 @@ func grab_slot_data(index: int) -> ItemSlotData:
 	
 	# If we have a slot to move, remove the slot and tell anyone caring about the change.
 	if slot_data != null and slot_data.stored_item != null:
-		var return_slot_data: ItemSlotData = slot_data.duplicate()
-		stored_items[index].clear_data()
+		#var return_slot_data: ItemSlotData = slot_data.duplicate()
+		#stored_items[index].clear_data()
+		stored_items[index] = null
 		inventory_updated.emit( self )
-		return return_slot_data
+		#return return_slot_data
+		return slot_data
 	else:
 		return null
 

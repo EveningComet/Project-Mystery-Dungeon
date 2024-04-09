@@ -39,7 +39,6 @@ func on_dungeon_finished_generating() -> void:
 	pm_inventory.initialize_slots()
 	equipment_menu.set_inventory_to_display( pm_inventory )
 	pm_inventory.inventory_interacted.connect( on_inventory_interacted )
-	
 
 func _input(event: InputEvent) -> void:
 	if grabbed_slot_ui.visible == true:

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CharacterClass" load_steps=2 format=3 uid="uid://b1m3yw88tk4pe"]
+
+[ext_resource type="Script" path="res://Scripts/Character/CharacterClass.gd" id="1_mrrwh"]
+
+[resource]
+script = ExtResource("1_mrrwh")
+localization_name = "Generalist"
+localization_description = "A testing class."
+starting_vitality = 10
+starting_expertise = 10
+starting_will = 10
+vitality_on_increase = 5
+expertise_on_increase = 5
+will_on_increase = 5
+available_skills = Array[Resource("res://Scripts/Character/Skills/SkillData.gd")]([])

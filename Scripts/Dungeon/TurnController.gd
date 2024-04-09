@@ -13,6 +13,7 @@ var curr_pawn: Pawn = null
 func _ready() -> void:
 	EventBus.dungeon_finished_generating.connect( on_dungeon_finished_generating )
 	EventBus.hp_depleted.connect( on_pawn_hp_depleted )
+	EventBus.advancing_to_next_floor.connect( on_advancing_to_next_floor )
 	EventBus.character_spawned_in_dungeon.connect( on_pawn_spawned )
 
 func on_pawn_spawned(new_pawn: Pawn) -> void:
@@ -55,3 +56,7 @@ func on_pawn_turn_finished(action: Action) -> void:
 func on_pawn_hp_depleted(stats: Stats) -> void:
 	var dead_pawn: Pawn = stats.get_parent().get_node("Pawn")
 	remove_pawn( dead_pawn )
+
+func on_advancing_to_next_floor() -> void:
+	turn_queue.clear()
+	current_entities.clear()
