@@ -19,10 +19,10 @@ func drop_slot_data(grabbed_slot_data: ItemSlotData, index: int) -> ItemSlotData
 	
 	if grabbed_slot_data.stored_item == null:
 		return grabbed_slot_data
-	
-	# If something wants to place an item in us that is not a weapon, stop it
-	if grabbed_slot_data.stored_item.item_type != ItemTypes.ItemTypes.Equipment:
-		return grabbed_slot_data
+	#
+	## If something wants to place an item in us that is not a weapon, stop it
+	#if grabbed_slot_data.stored_item.item_type != ItemTypes.ItemTypes.Equipment:
+		#return grabbed_slot_data
 		
 	# Prevent armors and weapons from going into the wrong slot
 	# 0: Weapons

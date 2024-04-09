@@ -36,3 +36,5 @@ script = ExtResource("5_2yf1f")
 
 [node name="EquipmentInventory" type="Node" parent="."]
 script = ExtResource("5_6ucxx")
+max_size = 4
+stored_items = Array[Resource("res://Scripts/Inventory/ItemSlotData.gd")]([null, null, null, null])

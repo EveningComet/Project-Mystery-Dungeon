@@ -36,8 +36,7 @@ func on_dungeon_finished_generating() -> void:
 	# TODO: Set this up cleaner.
 	equipment_menu.name_label.set_text( PlayerPartyController.party_members[0].get_parent().get_node("Stats").char_name )
 	var pm_inventory = PlayerPartyController.party_members[0].get_parent().get_node("EquipmentInventory")
-	pm_inventory.initialize_slots()
-	equipment_menu.set_inventory_to_display( pm_inventory )
+	equipment_menu.set_equipment_inventory( pm_inventory )
 	pm_inventory.inventory_interacted.connect( on_inventory_interacted )
 
 func _input(event: InputEvent) -> void:

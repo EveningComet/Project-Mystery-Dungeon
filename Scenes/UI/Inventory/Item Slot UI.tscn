@@ -1,11 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://ekcu645grfsj"]
+[gd_scene load_steps=3 format=3 uid="uid://ekcu645grfsj"]
 
 [ext_resource type="Script" path="res://Scripts/Inventory/ItemSlotUI.gd" id="1_i78v7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1rec0"]
 
 [node name="Item Slot UI" type="PanelContainer" node_paths=PackedStringArray("icon", "amount_label")]
 custom_minimum_size = Vector2(64, 64)
 offset_right = 40.0
 offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_1rec0")
 script = ExtResource("1_i78v7")
 icon = NodePath("MarginContainer/Icon")
 amount_label = NodePath("Amount")
