@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://byqlqfksdr7ha"]
+
+[ext_resource type="Texture2D" uid="uid://dllfym7ly4to3" path="res://Imported Assets/HumblePixel Free Paper UI System/1 Sprites/Content/2 Icons/14.png" id="1_najrp"]
+[ext_resource type="Script" path="res://Scripts/Inventory/ItemData.gd" id="1_vfb8w"]
+
+[resource]
+script = ExtResource("1_vfb8w")
+localization_name = "Cool Sword"
+localization_description = "A most bodacious sword."
+item_type = 1
+item_icon = ExtResource("1_najrp")
+max_stack_size = 1
+equip_type = 1
+weapon_type = 1

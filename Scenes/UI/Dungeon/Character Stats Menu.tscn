@@ -1,12 +1,12 @@
 [gd_scene load_steps=2 format=3 uid="uid://drlx36ts20j8m"]
 
-[ext_resource type="Script" path="res://Scripts/UI/Dungeon/CharacterStatsMenu.gd" id="1_g3n5q"]
+[ext_resource type="Script" path="res://Scripts/UI/Dungeon/Party/CharacterStatsMenu.gd" id="1_1pb3v"]
 
 [node name="Character Stats Menu" type="Control"]
 custom_minimum_size = Vector2(600, 300)
 layout_mode = 3
 anchors_preset = 0
-script = ExtResource("1_g3n5q")
+script = ExtResource("1_1pb3v")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1

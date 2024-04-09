@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://basbn4rm686me"]
+
+[ext_resource type="Script" path="res://Scripts/Inventory/ItemData.gd" id="1_exlha"]
+[ext_resource type="Texture2D" uid="uid://efii0j3dpgvd" path="res://Imported Assets/HumblePixel Free Paper UI System/1 Sprites/Content/9 Stamp/Stamp/Stamped/1.png" id="1_kk22q"]
+
+[resource]
+script = ExtResource("1_exlha")
+localization_name = "Test Armor"
+localization_description = "A pretty sweet hat."
+item_type = 1
+item_icon = ExtResource("1_kk22q")
+max_stack_size = 1
+equip_type = 2
+weapon_type = 0

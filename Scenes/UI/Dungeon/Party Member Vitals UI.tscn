@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c4bobuv1ddf6"]
 
-[ext_resource type="Script" path="res://Scripts/UI/Dungeon/PartyMemberVitalsUI.gd" id="1_7kjbg"]
+[ext_resource type="Script" path="res://Scripts/UI/Dungeon/Party/PartyMemberVitalsUI.gd" id="1_7kjbg"]
 [ext_resource type="Texture2D" uid="uid://30lsodk8uv7w" path="res://icon.svg" id="1_di44r"]
 
 [node name="Party Member Vitals UI" type="Control" node_paths=PackedStringArray("hp_text", "sp_text", "char_name")]

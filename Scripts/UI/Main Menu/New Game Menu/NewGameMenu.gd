@@ -35,6 +35,18 @@ func initialize_new_game_inventory() -> void:
 	slot_data.stored_item = test_item
 	slot_data.quantity = 50
 	PlayerInventory.add_singular_slot_data( slot_data )
+	
+	var test_weapon = load("res://Game Data/Items/Test Weapon.tres")
+	slot_data = ItemSlotData.new()
+	slot_data.stored_item = test_weapon
+	slot_data.quantity = 1
+	PlayerInventory.add_singular_slot_data( slot_data )
+	
+	var test_armor = load("res://Game Data/Items/Test Armor.tres")
+	slot_data = ItemSlotData.new()
+	slot_data.stored_item = test_armor
+	slot_data.quantity = 1
+	PlayerInventory.add_singular_slot_data( slot_data )
 
 ## Create the player character once they're done entering everything.
 func create_player() -> void:

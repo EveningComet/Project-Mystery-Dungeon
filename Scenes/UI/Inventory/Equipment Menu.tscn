@@ -1,13 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://b5eoxtkj86gjh"]
+[gd_scene load_steps=4 format=3 uid="uid://b5eoxtkj86gjh"]
 
-[ext_resource type="Script" path="res://Scripts/Inventory/EquipmentMenu.gd" id="1_jxy3x"]
+[ext_resource type="Script" path="res://Scripts/UI/Dungeon/Party/EquipmentMenu.gd" id="1_ad8dl"]
+[ext_resource type="PackedScene" uid="uid://ekcu645grfsj" path="res://Scenes/UI/Inventory/Item Slot UI.tscn" id="2_cdwu2"]
 
-[node name="Equipment Menu" type="Control" node_paths=PackedStringArray("name_label")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bjlno"]
+bg_color = Color(0, 0.72549, 0.172549, 1)
+
+[node name="Equipment Menu" type="Control" node_paths=PackedStringArray("name_label", "grid_container")]
 custom_minimum_size = Vector2(600, 400)
 layout_mode = 3
 anchors_preset = 0
-script = ExtResource("1_jxy3x")
+script = ExtResource("1_ad8dl")
 name_label = NodePath("PanelContainer/Name Label")
+item_slot_prefab = ExtResource("2_cdwu2")
+grid_container = NodePath("GridContainer")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -16,6 +22,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bjlno")
 
 [node name="Name Label" type="Label" parent="PanelContainer"]
 layout_mode = 2
@@ -23,3 +30,36 @@ size_flags_vertical = 0
 theme_override_font_sizes/font_size = 25
 text = "Char Name"
 horizontal_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -90.0
+offset_top = -20.0
+offset_right = -50.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+
+[node name="Item Slot UI" parent="GridContainer" instance=ExtResource("2_cdwu2")]
+layout_mode = 2
+
+[node name="Item Slot UI2" parent="GridContainer" node_paths=PackedStringArray("icon", "amount_label") instance=ExtResource("2_cdwu2")]
+layout_mode = 2
+icon = NodePath("../Item Slot UI/MarginContainer/Icon")
+amount_label = NodePath("../Item Slot UI/Amount")
+
+[node name="Item Slot UI3" parent="GridContainer" node_paths=PackedStringArray("icon", "amount_label") instance=ExtResource("2_cdwu2")]
+layout_mode = 2
+icon = NodePath("../Item Slot UI/MarginContainer/Icon")
+amount_label = NodePath("../Item Slot UI/Amount")
+
+[node name="Item Slot UI4" parent="GridContainer" node_paths=PackedStringArray("icon", "amount_label") instance=ExtResource("2_cdwu2")]
+layout_mode = 2
+icon = NodePath("../Item Slot UI/MarginContainer/Icon")
+amount_label = NodePath("../Item Slot UI/Amount")

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bdmomd3ugv8mm"]
 
-[ext_resource type="Script" path="res://Scripts/UI/Dungeon/PlayerDungeonHUD.gd" id="1_1i6a5"]
+[ext_resource type="Script" path="res://Scripts/UI/Dungeon/Party/PlayerDungeonHUD.gd" id="1_1i6a5"]
 [ext_resource type="PackedScene" uid="uid://c4bobuv1ddf6" path="res://Scenes/UI/Dungeon/Party Member Vitals UI.tscn" id="2_bsla6"]
 
 [node name="Player Dungeon HUD" type="Control" node_paths=PackedStringArray("party_container_node")]

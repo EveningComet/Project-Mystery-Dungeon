@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://2ch8sntks6kk"]
+[gd_scene load_steps=7 format=3 uid="uid://2ch8sntks6kk"]
 
 [ext_resource type="Texture2D" uid="uid://diihmm2175j50" path="res://Imported Assets/32rogues-spriteset/monsters.png" id="1_woy7e"]
 [ext_resource type="Script" path="res://Scripts/Components/FactionOwner.gd" id="2_nscjc"]
 [ext_resource type="Script" path="res://Scripts/Pawn/Pawn.gd" id="4_0jw07"]
 [ext_resource type="Script" path="res://Scripts/Components/Mover.gd" id="5_2yf1f"]
+[ext_resource type="Script" path="res://Scripts/Inventory/EquipmentInventory.gd" id="5_6ucxx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7blc1"]
 
@@ -32,3 +33,6 @@ ray = NodePath("../RayCast2D")
 
 [node name="Mover" type="Node" parent="."]
 script = ExtResource("5_2yf1f")
+
+[node name="EquipmentInventory" type="Node" parent="."]
+script = ExtResource("5_6ucxx")

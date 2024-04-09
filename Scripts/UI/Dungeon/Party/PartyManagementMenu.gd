@@ -2,11 +2,7 @@
 ## a character, and the player's current inventory.
 class_name PartyManagementMenu extends Control
 
-## Used to create the menu for party members at runtime.
-@export var equipment_menu_template: PackedScene
-
-## The node storing the equipment menu.
-@export var equipment_menu_holder: Control
+@export var equipment_menu: EquipmentMenu
 
 ## Reference to the menu that will display the currently desired character's
 ## stats.
@@ -37,10 +33,13 @@ func on_dungeon_finished_generating() -> void:
 	# Setup the scene using the player's inventory
 	initialize( PlayerInventory )
 	
-	# Generate the needed panels for the party members
-	var equipment_menu: EquipmentMenu = equipment_menu_template.instantiate()
-	equipment_menu_holder.add_child( equipment_menu )
+	# TODO: Set this up cleaner.
 	equipment_menu.name_label.set_text( PlayerPartyController.party_members[0].get_parent().get_node("Stats").char_name )
+	var pm_inventory = PlayerPartyController.party_members[0].get_parent().get_node("EquipmentInventory")
+	pm_inventory.initialize_slots()
+	equipment_menu.set_inventory_to_display( pm_inventory )
+	pm_inventory.inventory_interacted.connect( on_inventory_interacted )
+	
 
 func _input(event: InputEvent) -> void:
 	if grabbed_slot_ui.visible == true:
@@ -54,6 +53,9 @@ func on_visibility_changed() -> void:
 		update_grabbed_slot()
 
 func on_inventory_interacted(inventory_data: Inventory, index: int, button: int) -> void:
+	if OS.is_debug_build() == true:
+		print("PartyManagementMenu :: Clicked on: ", inventory_data.stored_items[index])
+	
 	match[grabbed_slot_data, button]:
 		# The player wants to grab the whole item
 		[null, MOUSE_BUTTON_LEFT]:
