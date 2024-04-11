@@ -30,22 +30,22 @@ func initialize_new_game_inventory() -> void:
 	PlayerInventory.initialize_slots()
 	
 	# Testing adding an item.
-	var test_item = load("res://Game Data/Items/Test Item.tres")
+	var test_item = preload("res://Game Data/Items/Test Item.tres")
 	var slot_data: ItemSlotData = ItemSlotData.new()
 	slot_data.stored_item = test_item
 	slot_data.quantity = 50
 	PlayerInventory.add_singular_slot_data( slot_data )
 	
-	var test_weapon = load("res://Game Data/Items/Test Weapon.tres")
+	var test_weapon = preload("res://Game Data/Items/Test Weapon.tres")
 	slot_data = ItemSlotData.new()
 	slot_data.stored_item = test_weapon
 	slot_data.quantity = 1
 	PlayerInventory.add_singular_slot_data( slot_data )
 	
-	var test_armor = load("res://Game Data/Items/Test Armor.tres")
+	var test_armor = preload("res://Game Data/Items/Test Armor.tres")
 	slot_data = ItemSlotData.new()
 	slot_data.stored_item = test_armor
-	slot_data.quantity = 1
+	slot_data.quantity    = 1
 	PlayerInventory.add_singular_slot_data( slot_data )
 
 ## Create the player character once they're done entering everything.
@@ -55,7 +55,6 @@ func create_player() -> void:
 	var stats: PlayerCharacterStats = PlayerCharacterStats.new()
 	stats.set_char_name( name_entry.get_text() )
 	stats.name = "Stats"
-	stats.initialize()
 	player.add_child(stats)
 	# TODO: Add friendly brain and disable it so that the player can switch between party members.
 	
@@ -63,6 +62,9 @@ func create_player() -> void:
 	# TODO: Proper setting of character class
 	var applied_class = load("res://Game Data/Character Classes/Classes/Generalist CD.tres")
 	stats.character_class = applied_class as CharacterClass
+	
+	# Setting up the character's equipment
+	player.get_node("EquipmentInventory").set_stats( stats )
 	
 	# TODO: Proper sprite setting
 	var sprite: Sprite2D

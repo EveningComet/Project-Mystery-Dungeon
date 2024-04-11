@@ -19,10 +19,9 @@ func clear_data() -> void:
 
 ## Remove and return one item of this.
 func create_single_slot_data() -> ItemSlotData:
-	var new_slot_data: ItemSlotData = ItemSlotData.new()
-	new_slot_data.stored_item = stored_item
+	var new_slot_data: ItemSlotData = duplicate()
 	new_slot_data.quantity = 1
-	quantity -= 1
+	quantity              -= 1
 	return new_slot_data
 
 ## Check if the item matches, we can stack, and the item has enough space for a partial merge.

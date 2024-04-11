@@ -15,20 +15,21 @@ signal inventory_interacted(inventory_data: Inventory, index: int, button: int)
 
 var money: int = 0
 
+## For when you want to create a clean inventory or one at runtime.
 func initialize_slots() -> void:
 	stored_items.clear()
 	for i in max_size:
-		var slot_data: ItemSlotData = ItemSlotData.new()
-		slot_data.stored_item = null
-		slot_data.quantity    = 0
-		stored_items.insert(i, slot_data)
+		var slot: ItemSlotData = ItemSlotData.new()
+		slot.stored_item = null
+		slot.quantity    = 0
+		stored_items.append( null )
 
 ## Return a slot data object, given the passed index.
 func grab_slot_data(index: int) -> ItemSlotData:
 	var slot_data: ItemSlotData = stored_items[index]
 	
 	# If we have a slot to move, remove the slot and tell anyone caring about the change.
-	if slot_data != null and slot_data.stored_item != null:
+	if slot_data != null:
 		stored_items[index] = null
 		inventory_updated.emit( self )
 		return slot_data
@@ -39,11 +40,10 @@ func grab_slot_data(index: int) -> ItemSlotData:
 func drop_single_slot_data(grabbed_slot_data: ItemSlotData, index: int) -> ItemSlotData:
 	var slot_data: ItemSlotData = stored_items[index]
 	
-	if slot_data == null or slot_data.stored_item == null:
+	if slot_data == null:
 		stored_items[index] = grabbed_slot_data.create_single_slot_data()
 	elif slot_data.can_merge_with(grabbed_slot_data) == true:
 		slot_data.fully_merge_with( grabbed_slot_data.create_single_slot_data() )
-	
 	
 	inventory_updated.emit( self )
 	if grabbed_slot_data.quantity > 0:
@@ -56,22 +56,21 @@ func drop_slot_data(grabbed_slot_data: ItemSlotData, index: int) -> ItemSlotData
 	var slot_data: ItemSlotData = stored_items[index]
 	
 	var return_slot_data: ItemSlotData
-	if slot_data != null and slot_data.stored_item != null and slot_data.can_fully_merge_with(grabbed_slot_data):
+	if slot_data != null and slot_data.can_fully_merge_with(grabbed_slot_data):
 		slot_data.fully_merge_with(grabbed_slot_data)
 	else:
 		stored_items[index] = grabbed_slot_data
-		return_slot_data    = slot_data
+		return_slot_data = slot_data
 	
 	inventory_updated.emit( self )
 	return return_slot_data
 
 ## Use the stored item at the passed index.
 func use_slot_data(index: int) -> void:
-	# TODO: Make this return the item so that the characters will be able to use them.
 	var slot_data: ItemSlotData = stored_items[index]
 	
-	# There is no item at the passed index, so do nothing
-	if slot_data.stored_item == null:
+	# There is no item at the passed index, so do nothing.
+	if slot_data == null or slot_data.stored_item == null:
 		return
 	
 	# Depending on the item, this is where we do stuff.
@@ -79,18 +78,16 @@ func use_slot_data(index: int) -> void:
 	if slot_data.stored_item.item_type == ItemTypes.ItemTypes.Consumable:
 		slot_data.quantity -= 1
 		
-		# TODO: This is where the usage of the item will go.
-		
+		# Since the inventory object is a child of a player/character, get the player
+		# The item will know what it should do from there
+		slot_data.stored_item.use( get_parent() )
 		if slot_data.quantity < 1:
 			stored_items[index] = null
 	
 	# Tell anything that needs to know about the change
 	inventory_updated.emit( self )
-	
-	if OS.is_debug_build() == true:
-		print("Inventory :: Attempting to use item: %s." % [slot_data.stored_item.localization_name])
 
-## Used when adding a singular slot data.
+## Used when picking up singular items on the ground.
 func add_singular_slot_data(slot_data: ItemSlotData) -> bool:
 	
 	# If we find a slot we can stack to, try it
@@ -100,7 +97,7 @@ func add_singular_slot_data(slot_data: ItemSlotData) -> bool:
 			inventory_updated.emit( self )
 			return true
 	
-	# If we find a null location, add the item
+	# If we find an empty space, pickup the item.
 	for index in stored_items.size():
 		if stored_items[index] == null:
 			stored_items[index] = slot_data
@@ -109,13 +106,10 @@ func add_singular_slot_data(slot_data: ItemSlotData) -> bool:
 	
 	# Add an item to a slot if it has nothing
 	for index in stored_items.size():
-		if stored_items[index] != null and stored_items[index].stored_item == null:
+		if stored_items[index] == null or stored_items[index].stored_item == null:
 			stored_items[index] = slot_data
 			inventory_updated.emit( self )
 			return true
-	
-	if OS.is_debug_build() == true:
-		printerr("Inventory :: Could not add the slot data (%s) (%s)." % [slot_data, slot_data.stored_item.localization_name])
 	
 	return false
 

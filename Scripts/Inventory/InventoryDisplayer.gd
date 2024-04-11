@@ -34,8 +34,8 @@ func populate_item_grid(inventory_data: Inventory) -> void:
 		
 		# Subscribe to any relevant events
 		# Tell our monitored inventory to connect to the slot clicked events
-		slot.slot_clicked.connect(inventory_to_display.on_slot_clicked)
+		slot.slot_clicked.connect( inventory_to_display.on_slot_clicked )
 		
 		# If the current slot has something to show
-		if slot_data != null and slot_data.stored_item != null:
+		if slot_data != null:
 			slot.set_slot_data(slot_data)

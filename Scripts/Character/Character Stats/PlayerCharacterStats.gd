@@ -98,6 +98,7 @@ func level_up() -> void:
 	)
 	
 	# Boost the rest of the stats
+	# TODO: Account for equipment here so the player doesn't lose their stats.
 	# TODO: This is nasty. Don't do this.
 	# Vitals
 	stats[StatTypes.stat_types.MaxHP] = Stat.new(

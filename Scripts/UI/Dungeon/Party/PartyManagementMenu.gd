@@ -20,18 +20,17 @@ var grabbed_slot_data: ItemSlotData = null
 var original_index: int = 0 # Used to prevent losing items to the garbage collector
 
 func _ready() -> void:
-	EventBus.dungeon_finished_generating.connect( on_dungeon_finished_generating )
 	visibility_changed.connect( on_visibility_changed )
 	hide()
 
-func initialize(inventory: Inventory) -> void:
+func initialize_player_inventory(inventory: Inventory) -> void:
 	player_inventory = inventory
 	player_inventory_ui.set_inventory_to_display( player_inventory )
 	inventory.inventory_interacted.connect( on_inventory_interacted )
 
 func on_dungeon_finished_generating() -> void:
 	# Setup the scene using the player's inventory
-	initialize( PlayerInventory )
+	initialize_player_inventory( PlayerInventory )
 	
 	# TODO: Set this up cleaner.
 	equipment_menu.name_label.set_text( PlayerPartyController.party_members[0].get_parent().get_node("Stats").char_name )
@@ -58,7 +57,6 @@ func on_inventory_interacted(inventory_data: Inventory, index: int, button: int)
 		# The player wants to grab the whole item
 		[null, MOUSE_BUTTON_LEFT]:
 			grabbed_slot_data = inventory_data.grab_slot_data(index)
-			original_index = index
 		
 		# The player wants to drop the item in a new slot
 		[_, MOUSE_BUTTON_LEFT]:
@@ -77,7 +75,7 @@ func on_inventory_interacted(inventory_data: Inventory, index: int, button: int)
 
 ## Handle displaying a slot the player currently has grabbed.
 func update_grabbed_slot() -> void:
-	if grabbed_slot_data != null and grabbed_slot_data.stored_item != null:
+	if grabbed_slot_data != null:
 		grabbed_slot_ui.global_position = get_global_mouse_position()
 		grabbed_slot_ui.show()
 		grabbed_slot_ui.set_slot_data( grabbed_slot_data)

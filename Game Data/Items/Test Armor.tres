@@ -1,14 +1,23 @@
-[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://basbn4rm686me"]
+[gd_resource type="Resource" script_class="ItemData" load_steps=5 format=3 uid="uid://civ2uxm0t3p30"]
 
 [ext_resource type="Script" path="res://Scripts/Inventory/ItemData.gd" id="1_exlha"]
-[ext_resource type="Texture2D" uid="uid://efii0j3dpgvd" path="res://Imported Assets/HumblePixel Free Paper UI System/1 Sprites/Content/9 Stamp/Stamp/Stamped/1.png" id="1_kk22q"]
+[ext_resource type="Texture2D" uid="uid://c2ye53sbd1ar2" path="res://Imported Assets/HumblePixel Free Paper UI System/1 Sprites/Content/2 Icons/22.png" id="1_umqf8"]
+[ext_resource type="Script" path="res://Scripts/Stats/StatModifier.gd" id="3_u02am"]
+
+[sub_resource type="Resource" id="Resource_58db6"]
+script = ExtResource("3_u02am")
+stat_changing = 7
+stat_modifier_type = 0
+value = 5.0
+sort_order = 0
 
 [resource]
 script = ExtResource("1_exlha")
 localization_name = "Test Armor"
-localization_description = "A pretty sweet hat."
+localization_description = "A cool armor."
 item_type = 1
-item_icon = ExtResource("1_kk22q")
+item_icon = ExtResource("1_umqf8")
 max_stack_size = 1
 equip_type = 2
+stat_modifiers = Array[ExtResource("3_u02am")]([SubResource("Resource_58db6")])
 weapon_type = 0

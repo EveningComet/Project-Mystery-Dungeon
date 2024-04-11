@@ -40,6 +40,7 @@ func on_walker_finished(location_history: PackedVector2Array) -> void:
 	)
 	
 	# The player can now start playing
+	EventBus.dungeon_finished_generating.connect( my_state_machine.party_management_menu.on_dungeon_finished_generating )
 	EventBus.dungeon_finished_generating.emit()
 	
 	my_state_machine.change_to_state("DungeonRunning")

@@ -10,6 +10,7 @@ class_name ItemData extends Resource
 
 @export_category("Equipment Info")
 @export var equip_type: ItemTypes.EquipmentTypes = ItemTypes.EquipmentTypes.None
+@export var stat_modifiers: Array[StatModifier] = []
 
 @export_category("Weapon Info")
 @export var weapon_type: ItemTypes.WeaponTypes = ItemTypes.WeaponTypes.None

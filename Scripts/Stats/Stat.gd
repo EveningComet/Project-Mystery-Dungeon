@@ -46,8 +46,7 @@ func sort_ascending(mod_a, mod_b):
 ## Get the calculated value for this stat.
 func get_calculated_value() -> float:
 	var final_value = base_value
-	for i in range( modifiers.size() ):
-		var mod = (modifiers[i] as StatModifier)
+	for mod: StatModifier in modifiers:
 		if mod.stat_modifier_type == StatModifierTypes.stat_modifier_types.Flat:
 			final_value += mod.get_value()
 		elif mod.stat_modifier_type == StatModifierTypes.stat_modifier_types.Percent:
