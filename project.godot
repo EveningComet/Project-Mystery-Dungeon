@@ -14,7 +14,7 @@ config/name="Project Mystery Dungeon"
 config/description="A mystery dungeon inspired game inside Godot."
 run/main_scene="res://Scenes/UI/Main Menu/Main Menu.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://Imported Assets/Icon/dungeon-gate.svg"
 
 [autoload]
 

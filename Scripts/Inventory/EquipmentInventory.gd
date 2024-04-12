@@ -14,6 +14,14 @@ func initialize_slots() -> void:
 	max_size = MAX_NUMBER_EQUP_SLOTS
 	super()
 
+## Modified version that removes any modifiers from an item, if it exists.
+func grab_slot_data(index: int) -> ItemSlotData:
+	var slot_data: ItemSlotData = stored_items[index]
+	if slot_data != null and slot_data.stored_item != null:
+		remove_modifiers_from_equipment( slot_data.stored_item )
+	
+	return super(index)
+
 ## A modified version of the drop slot data method that only accepts equipment
 func drop_slot_data(grabbed_slot_data: ItemSlotData, index: int) -> ItemSlotData:
 		
@@ -77,4 +85,4 @@ func add_modifiers_from_equipment(item_data: ItemData) -> void:
 
 func remove_modifiers_from_equipment(item_data: ItemData) -> void:
 	for sm: StatModifier in item_data.stat_modifiers:
-		stats.remove_modifier(sm.stat_type, sm)
+		stats.remove_modifier(sm.stat_changing, sm)
