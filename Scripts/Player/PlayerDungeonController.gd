@@ -21,6 +21,9 @@ func _unhandled_input(event) -> void:
 	if curr_pawn == null or curr_pawn.my_turn == false:
 		return
 	
+	# Handle switching of party members
+	swap_controlled_party_member(event)
+	
 	if event.is_action_pressed("toggle_party_management_screen"):
 		party_management_menu.visible = !party_management_menu.visible
 	
@@ -65,12 +68,42 @@ func _unhandled_input(event) -> void:
 			if tile_data != null and tile_data.get_custom_data("Type") != "Impassable":
 				var target_pos: Vector2 = tile_map.map_to_local( curr_pos + Vector2i(inputs[dir]))
 				curr_pawn.get_parent().get_node("Mover").move(target_pos)
-	
+
 ## Set the current pawn the player will be controlling and disable that pawn's
 ## AI brain.
 func set_current_pawn(new_curr_pawn: Pawn) -> void:
 	curr_pawn = new_curr_pawn
 	camera_controller.set_target( curr_pawn.get_parent() )
 
-func switch_controlled_character() -> void:
-	pass
+func swap_controlled_party_member(event: InputEvent) -> void:
+	if PlayerPartyController.get_party_count() == 1:
+		return
+	var swapping = false
+	if event.is_action_pressed("swap_right"):
+		var curr_index = PlayerPartyController.party_members.find( curr_pawn )
+		curr_index += 1
+		if curr_index > PlayerPartyController.get_party_count() - 1:
+			curr_index = 0
+		curr_pawn.get_parent().get_node("FriendlyBrain").toggle_player_controlling(false)
+		set_current_pawn(PlayerPartyController.party_members[curr_index])
+		EventBus.player_swapped_controlled_character.emit( curr_pawn )
+		swapping = true
+	elif event.is_action_pressed("swap_left"):
+		var curr_index = PlayerPartyController.party_members.find( curr_pawn )
+		curr_index -= 1
+		if curr_index < 0:
+			curr_index = PlayerPartyController.get_party_count() - 1
+		curr_pawn.get_parent().get_node("FriendlyBrain").toggle_player_controlling(false)
+		set_current_pawn( PlayerPartyController.party_members[curr_index] )
+		EventBus.player_swapped_controlled_character.emit( curr_pawn )
+		swapping = true
+	
+	if swapping == true:
+		PlayerPartyController.set_current_pawn( curr_pawn )
+		curr_pawn.get_parent().get_node("FriendlyBrain").toggle_player_controlling(true)
+		for pm in PlayerPartyController.party_members:
+			var friendly = pm.get_parent().get_node("FriendlyBrain")
+			if pm != curr_pawn:
+				if OS.is_debug_build() == true:
+					print("PlayerDungeonController :: New player is being set for party member.")
+				friendly.set_player( curr_pawn )

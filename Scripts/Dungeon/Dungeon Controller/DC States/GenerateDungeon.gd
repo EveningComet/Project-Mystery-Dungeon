@@ -36,7 +36,7 @@ func on_walker_finished(location_history: PackedVector2Array) -> void:
 	# Set the current pawn for the player
 	# TODO: Set this properly for floor transitions.
 	my_state_machine.player_dungeon_controller.set_current_pawn(
-		PlayerPartyController.party_members[0]
+		PlayerPartyController.curr_pawn
 	)
 	
 	# The player can now start playing
@@ -58,7 +58,7 @@ func spawn_player_party() -> void:
 		mover.set_pawn( pawn )
 		if party_member.has_node("FriendlyBrain") == true:
 			party_member.get_node("FriendlyBrain").set_pathfinder( my_state_machine.pathfinder )
-			party_member.get_node("FriendlyBrain").set_player( PlayerPartyController.party_members[0] )
+			party_member.get_node("FriendlyBrain").set_player( PlayerPartyController.curr_pawn )
 		
 		# Attempt to place the party near one another
 		var pos: Vector2 = tile_map.map_to_local( my_state_machine.walked_tiles[i] )
@@ -85,6 +85,10 @@ func spawn_potential_party_members() -> void:
 	ally.get_node("Mover").set_pawn( pawn )
 	var stats: PlayerCharacterStats = PlayerCharacterStats.new()
 	stats.name = "Stats"
+	var equipment_inventory: EquipmentInventory = EquipmentInventory.new()
+	equipment_inventory.name = "EquipmentInventory"
+	ally.add_child(equipment_inventory)
+	equipment_inventory.set_stats(stats)
 	var applied_class = load("res://Game Data/Character Classes/Classes/Holy Mage.tres")
 	stats.character_class = applied_class as CharacterClass
 	ally.add_child( stats )

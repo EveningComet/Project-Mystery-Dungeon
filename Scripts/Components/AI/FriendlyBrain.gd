@@ -2,11 +2,18 @@ class_name FriendlyBrain extends AIBrain
 
 ## The current character the player is controlling.
 var player: Pawn
+var player_currently_controlling: bool = false
 
 func set_player(new_player: Pawn) -> void:
 	player = new_player
+	
+func toggle_player_controlling(new_status: bool) -> void:
+	player_currently_controlling = new_status
 
 func operate() -> void:
+	if player_currently_controlling == true:
+		return
+	
 	if player == null:
 		get_parent().get_node("Pawn").finished_turn.emit( null )
 		return

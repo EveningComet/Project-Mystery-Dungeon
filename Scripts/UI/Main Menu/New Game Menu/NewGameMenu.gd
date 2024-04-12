@@ -56,7 +56,13 @@ func create_player() -> void:
 	stats.set_char_name( name_entry.get_text() )
 	stats.name = "Stats"
 	player.add_child(stats)
-	# TODO: Add friendly brain and disable it so that the player can switch between party members.
+	
+	# Add the friendly brain for switching and all that
+	var friendly_brain = FriendlyBrain.new()
+	friendly_brain.toggle_player_controlling( true )
+	friendly_brain.name = "FriendlyBrain"
+	player.add_child(friendly_brain)
+	friendly_brain.set_player( player.get_node("Pawn"))
 	
 	# Apply the character class
 	# TODO: Proper setting of character class
@@ -64,7 +70,10 @@ func create_player() -> void:
 	stats.character_class = applied_class as CharacterClass
 	
 	# Setting up the character's equipment
-	player.get_node("EquipmentInventory").set_stats( stats )
+	var equipment_inventory := EquipmentInventory.new()
+	equipment_inventory.name = "EquipmentInventory"
+	player.add_child( equipment_inventory )
+	equipment_inventory.set_stats( stats )
 	
 	# TODO: Proper sprite setting
 	var sprite: Sprite2D
@@ -75,4 +84,5 @@ func create_player() -> void:
 	sprite.frame   = 8
 	
 	PlayerPartyController.add_party_member( player.get_node("Pawn") )
+	PlayerPartyController.set_current_pawn( player.get_node("Pawn") )
 	PlayerPartyController.add_child( player )

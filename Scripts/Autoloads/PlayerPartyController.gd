@@ -7,6 +7,11 @@ const MAX_RECRUITED_PARTY_SIZE: int = 4
 
 var party_members: Array[Pawn] = []
 
+var curr_pawn: Pawn
+
+func set_current_pawn(new_curr_pawn: Pawn) -> void:
+	curr_pawn = new_curr_pawn
+
 func gain_experience(xp_to_give: int) -> void:
 	for pm in party_members:
 		pm.get_parent().get_node("Stats").gain_experience( xp_to_give )

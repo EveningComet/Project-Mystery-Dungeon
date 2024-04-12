@@ -13,6 +13,8 @@ class_name PartyManagementMenu extends Control
 ## Reference to the node housing the player's inventory.
 var player_inventory: Inventory
 
+var equipment_inventory: EquipmentInventory
+
 # Inventory middleman/item dragging and dropping
 ## Used to display a grabbed slot to the player.
 @export var grabbed_slot_ui: ItemSlotUI
@@ -20,6 +22,7 @@ var grabbed_slot_data: ItemSlotData = null
 var original_index: int = 0 # Used to prevent losing items to the garbage collector
 
 func _ready() -> void:
+	EventBus.player_swapped_controlled_character.connect( on_player_swapped_controlled_character )
 	visibility_changed.connect( on_visibility_changed )
 	hide()
 
@@ -33,10 +36,7 @@ func on_dungeon_finished_generating() -> void:
 	initialize_player_inventory( PlayerInventory )
 	
 	# TODO: Set this up cleaner.
-	equipment_menu.name_label.set_text( PlayerPartyController.party_members[0].get_parent().get_node("Stats").char_name )
-	var pm_inventory = PlayerPartyController.party_members[0].get_parent().get_node("EquipmentInventory")
-	equipment_menu.set_equipment_inventory( pm_inventory )
-	pm_inventory.inventory_interacted.connect( on_inventory_interacted )
+	set_party_member_equipment_to_display(PlayerPartyController.curr_pawn)
 
 func _input(event: InputEvent) -> void:
 	if grabbed_slot_ui.visible == true:
@@ -81,3 +81,14 @@ func update_grabbed_slot() -> void:
 		grabbed_slot_ui.set_slot_data( grabbed_slot_data)
 	else:
 		grabbed_slot_ui.hide()
+
+func set_party_member_equipment_to_display(new_pawn: Pawn) -> void:
+	equipment_menu.name_label.set_text( new_pawn.get_parent().get_node("Stats").char_name )
+	if equipment_inventory != null:
+		equipment_inventory.inventory_interacted.disconnect( on_inventory_interacted )
+	equipment_inventory = new_pawn.get_parent().get_node("EquipmentInventory")
+	equipment_menu.set_equipment_inventory( equipment_inventory )
+	equipment_inventory.inventory_interacted.connect( on_inventory_interacted )
+
+func on_player_swapped_controlled_character(new_pawn: Pawn) -> void:
+	set_party_member_equipment_to_display( new_pawn )

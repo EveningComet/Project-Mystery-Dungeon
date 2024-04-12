@@ -45,10 +45,6 @@ func drop_slot_data(grabbed_slot_data: ItemSlotData, index: int) -> ItemSlotData
 	# stats and all that
 	add_modifiers_from_equipment( grabbed_slot_data.stored_item )
 	
-	if OS.is_debug_build() == true:
-		var d: Dictionary = stats.stats
-		printerr("EquipmentInventory :: Defense is now: ", d[StatTypes.stat_types.Defense].get_calculated_value())
-	
 	return super.drop_slot_data( grabbed_slot_data, index )
 
 ## A modified version of the drop single slot data method that only accepts equipment

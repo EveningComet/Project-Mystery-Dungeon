@@ -11,3 +11,4 @@ var equipment_inventory: EquipmentInventory
 func set_equipment_inventory(equipment_data: EquipmentInventory) -> void:
 	equipment_inventory = equipment_data
 	equipment_displayer.set_inventory_to_display( equipment_inventory )
+	equipment_displayer.populate_item_grid(equipment_data)

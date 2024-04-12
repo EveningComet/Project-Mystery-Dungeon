@@ -13,5 +13,8 @@ signal dungeon_finished_generating
 
 signal advancing_to_next_floor
 
+## Fired when the player has swapped the party member they are currently controlling.
+signal player_swapped_controlled_character(new_current_pawn: Pawn)
+
 ## For when the player activated the exit and wants to proceed to the next floor.
 signal player_activated_exit
