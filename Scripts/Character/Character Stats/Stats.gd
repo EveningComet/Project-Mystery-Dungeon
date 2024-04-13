@@ -21,6 +21,10 @@ func initialize() -> void:
 		true
 	)
 	
+	initialize_vitals()
+	initialize_other_stats()
+
+func initialize_vitals() -> void:
 	# Vitals
 	stats[StatTypes.stat_types.MaxHP] = Stat.new(
 		stats[StatTypes.stat_types.Vitality].get_calculated_value() * 3,
@@ -32,21 +36,92 @@ func initialize() -> void:
 		true
 	)
 	stats[StatTypes.stat_types.CurrentSP] = stats[StatTypes.stat_types.MaxSP].get_calculated_value()
-	
-	# Other stats
+
+## Setup the other stats.
+func initialize_other_stats() -> void:
+	# This is the "bonus" base defense
 	stats[StatTypes.stat_types.Defense] = Stat.new(
-		stats[StatTypes.stat_types.Vitality].get_calculated_value() * 2,
+		0,
+		true
+	)
+	
+	# This is the "bonus" speed
+	stats[StatTypes.stat_types.Speed] = Stat.new(
+		0,
+		true
+	)
+	
+	# The "bonus" perception
+	stats[StatTypes.stat_types.Perception] = Stat.new(
+		0,
+		true
+	)
+	
+	# This is the "bonus" evasion
+	stats[StatTypes.stat_types.Evasion] = Stat.new(
+		0,
+		true
+	)
+	
+	# This is the "bonus" critical hit chance
+	stats[StatTypes.stat_types.CriticalHitChance] = Stat.new(
+		0,
 		true
 	)
 
 # TODO: Figure out how to distinguish between ranged.
+# TODO: Figure out how to handle the "base" damage stat.
 ## Get the physical power for a character.
 func get_physical_power() -> int:
 	return stats[StatTypes.stat_types.Expertise].get_calculated_value() * 2
 
 ## Get the special power for a character.
 func get_special_power() -> int:
-	return stats[StatTypes.stat_types.Will].get_calculated_value() * 2  
+	return stats[StatTypes.stat_types.Will].get_calculated_value() * 2
+
+## Return the "true" perception, which is used for the chance to hit.
+func get_perception() -> int:
+	var expertise: int = stats[StatTypes.stat_types.Expertise].get_calculated_value()
+	var will:      int = stats[StatTypes.stat_types.Will].get_calculated_value()
+	var true_perception: Stat = Stat.new(expertise + will, true)
+	for mod: StatModifier in stats[StatTypes.stat_types.Perception].get_modifiers():
+		true_perception.add_modifier( mod )
+	return floor( true_perception.get_calculated_value() )
+
+## Return the "true" base defense for this character.
+func get_defense() -> int:
+	var vitality:     int  = stats[StatTypes.stat_types.Vitality].get_calculated_value()
+	var true_defense: Stat = Stat.new(vitality * 2, true)
+	for mod: StatModifier in stats[StatTypes.stat_types.Defense].get_modifiers():
+		true_defense.add_modifier( mod )
+	return floor( true_defense.get_calculated_value() )
+
+## Returns the "true" evasion for a character.
+func get_evasion() -> int:
+	var vitality:  int = stats[StatTypes.stat_types.Vitality].get_calculated_value()
+	var expertise: int = stats[StatTypes.stat_types.Expertise].get_calculated_value()
+	var true_evasion: Stat = Stat.new(vitality + expertise, true)
+	for mod: StatModifier in stats[StatTypes.stat_types.Evasion].get_modifiers():
+		true_evasion.add_modifier( mod )
+	return floor( true_evasion.get_calculated_value() )
+
+## Get the true critical hit chance for a character.
+func get_crit_chance() -> int:
+	var expertise: int = stats[StatTypes.stat_types.Expertise].get_calculated_value()
+	var true_crit_chance: Stat = Stat.new(expertise, true)
+	for mod: StatModifier in stats[StatTypes.stat_types.CriticalHitChance].get_modifiers():
+		true_crit_chance.add_modifier( mod )
+	return floor( true_crit_chance.get_calculated_value() )
+
+## Gets the "true" speed for a character, which takes into account the
+## character's base speed and modifiers.
+func get_speed() -> int:
+	var vitality: int = stats[StatTypes.stat_types.Vitality].get_calculated_value()
+	var will:     int = stats[StatTypes.stat_types.Will].get_calculated_value()
+	var true_speed: Stat = Stat.new(vitality + will, true)
+	for mod: StatModifier in stats[StatTypes.stat_types.Speed].get_modifiers():
+		true_speed.add_modifier( mod )
+	return floor( true_speed.get_calculated_value() / 2 )
 	
 func add_modifier(stat_type: StatTypes.stat_types, mod_to_add: StatModifier) -> void:
 	stats[stat_type].add_modifier( mod_to_add )

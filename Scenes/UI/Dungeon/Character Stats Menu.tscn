@@ -1,12 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://drlx36ts20j8m"]
+[gd_scene load_steps=3 format=3 uid="uid://drlx36ts20j8m"]
 
 [ext_resource type="Script" path="res://Scripts/UI/Dungeon/Party/CharacterStatsMenu.gd" id="1_1pb3v"]
+[ext_resource type="PackedScene" uid="uid://c8gicxbt2rwqv" path="res://Scenes/UI/Dungeon/Character Stats Displayer.tscn" id="2_hi21e"]
 
-[node name="Character Stats Menu" type="Control"]
+[node name="Character Stats Menu" type="Control" node_paths=PackedStringArray("char_level", "vitality_stat", "expertise_stat", "will_stat", "defense_stat")]
 custom_minimum_size = Vector2(600, 300)
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_1pb3v")
+char_level = NodePath("PanelContainer/MarginContainer/Attributes Container/Level Displayer")
+vitality_stat = NodePath("PanelContainer/MarginContainer/Attributes Container/Vitality Stat")
+expertise_stat = NodePath("PanelContainer/MarginContainer/Attributes Container/Expertise Stat")
+will_stat = NodePath("PanelContainer/MarginContainer/Attributes Container/Will Stat")
+defense_stat = NodePath("PanelContainer/MarginContainer/Attributes Container/Defense Stat")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -28,22 +34,17 @@ layout_mode = 2
 size_flags_horizontal = 0
 theme_override_constants/separation = 10
 
-[node name="Level" type="Label" parent="PanelContainer/MarginContainer/Attributes Container"]
+[node name="Level Displayer" parent="PanelContainer/MarginContainer/Attributes Container" instance=ExtResource("2_hi21e")]
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "Level: 1"
 
-[node name="Vitality" type="Label" parent="PanelContainer/MarginContainer/Attributes Container"]
+[node name="Vitality Stat" parent="PanelContainer/MarginContainer/Attributes Container" instance=ExtResource("2_hi21e")]
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "Vitality: 10"
 
-[node name="Expertise" type="Label" parent="PanelContainer/MarginContainer/Attributes Container"]
+[node name="Expertise Stat" parent="PanelContainer/MarginContainer/Attributes Container" instance=ExtResource("2_hi21e")]
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "Expertise: 10"
 
-[node name="Will" type="Label" parent="PanelContainer/MarginContainer/Attributes Container"]
+[node name="Will Stat" parent="PanelContainer/MarginContainer/Attributes Container" instance=ExtResource("2_hi21e")]
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "Will: 10"
+
+[node name="Defense Stat" parent="PanelContainer/MarginContainer/Attributes Container" instance=ExtResource("2_hi21e")]
+layout_mode = 2

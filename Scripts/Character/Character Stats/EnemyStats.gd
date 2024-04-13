@@ -21,21 +21,6 @@ func initialize_enemy(ed: EnemyData) -> void:
 		true
 	)
 	
-	# Vitals
-	stats[StatTypes.stat_types.MaxHP] = Stat.new(
-		stats[StatTypes.stat_types.Vitality].get_calculated_value() * 3,
-		true
-	)
-	stats[StatTypes.stat_types.CurrentHP] = stats[StatTypes.stat_types.MaxHP].get_calculated_value()
-	stats[StatTypes.stat_types.MaxSP] = Stat.new(
-		stats[StatTypes.stat_types.Will].get_calculated_value() * 3,
-		true
-	)
-	stats[StatTypes.stat_types.CurrentSP] = stats[StatTypes.stat_types.MaxSP].get_calculated_value()
-	
-	# Other stats
-	stats[StatTypes.stat_types.Defense] = Stat.new(
-		stats[StatTypes.stat_types.Vitality].get_calculated_value() * 2,
-		true
-	)
+	initialize_vitals()
+	initialize_other_stats()
 	

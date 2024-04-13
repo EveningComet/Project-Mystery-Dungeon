@@ -35,7 +35,7 @@ func on_dungeon_finished_generating() -> void:
 	# Setup the scene using the player's inventory
 	initialize_player_inventory( PlayerInventory )
 	
-	# TODO: Set this up cleaner.
+	set_party_member_stats_to_display( PlayerPartyController.curr_pawn )
 	set_party_member_equipment_to_display(PlayerPartyController.curr_pawn)
 
 func _input(event: InputEvent) -> void:
@@ -90,5 +90,9 @@ func set_party_member_equipment_to_display(new_pawn: Pawn) -> void:
 	equipment_menu.set_equipment_inventory( equipment_inventory )
 	equipment_inventory.inventory_interacted.connect( on_inventory_interacted )
 
+func set_party_member_stats_to_display(new_pawn: Pawn) -> void:
+	character_stats_menu.set_stats_to_display( new_pawn.get_parent().get_node("Stats") )
+
 func on_player_swapped_controlled_character(new_pawn: Pawn) -> void:
 	set_party_member_equipment_to_display( new_pawn )
+	set_party_member_stats_to_display( new_pawn )
