@@ -1,0 +1,43 @@
+[gd_resource type="Resource" script_class="UtilityAIBehavior" load_steps=8 format=3 uid="uid://cyujk8dgyc6xg"]
+
+[ext_resource type="Script" path="res://addons/utility_ai/core/utility_ai_response_curve.gd" id="1_4674k"]
+[ext_resource type="Script" path="res://addons/utility_ai/core/utility_ai_behavior.gd" id="1_bmit8"]
+[ext_resource type="Script" path="res://addons/utility_ai/core/utility_ai_consideration.gd" id="1_efg8s"]
+
+[sub_resource type="Curve" id="Curve_72ddr"]
+_data = [Vector2(0, 0), 0.0, 1.0, 1, 1, Vector2(0.1, 0.1), 1.0, 1.0, 1, 1, Vector2(0.2, 0.2), 1.0, 1.0, 1, 1, Vector2(0.3, 0.3), 1.0, 1.0, 1, 1, Vector2(0.4, 0.4), 1.0, 1.0, 1, 1, Vector2(0.5, 0.5), 1.0, 1.0, 1, 1, Vector2(0.6, 0.6), 1.0, 1.0, 1, 1, Vector2(0.7, 0.7), 1.0, 1.0, 1, 1, Vector2(0.8, 0.8), 1.0, 1.0, 1, 1, Vector2(0.9, 0.9), 1.0, 1.0, 1, 1, Vector2(1, 1), 1.0, 0.0, 1, 1]
+point_count = 11
+script = ExtResource("1_4674k")
+curve_type = 1
+exponent = 1
+slope = 1
+x_shift = 0.0
+y_shift = 0.0
+
+[sub_resource type="Resource" id="Resource_a68i5"]
+script = ExtResource("1_efg8s")
+input_key = "num_enemies_nearby"
+invert = true
+response_curve = SubResource("Curve_72ddr")
+
+[sub_resource type="Curve" id="Curve_wg35a"]
+_data = [Vector2(0, 0.00669285), 0.0, 0.112934, 1, 1, Vector2(0.1, 0.0179862), 0.112934, 0.294397, 1, 1, Vector2(0.2, 0.0474259), 0.294397, 0.71777, 1, 1, Vector2(0.3, 0.119203), 0.71777, 1.49739, 1, 1, Vector2(0.4, 0.268941), 1.49739, 2.31059, 1, 1, Vector2(0.5, 0.5), 2.31059, 2.31059, 1, 1, Vector2(0.6, 0.731059), 2.31059, 1.49739, 1, 1, Vector2(0.7, 0.880797), 1.49739, 0.71777, 1, 1, Vector2(0.8, 0.952574), 0.71777, 0.294396, 1, 1, Vector2(0.9, 0.982014), 0.294396, 0.112934, 1, 1, Vector2(1, 0.993307), 0.112934, 0.0, 1, 1]
+point_count = 11
+script = ExtResource("1_4674k")
+curve_type = 3
+exponent = 10
+slope = 1
+x_shift = 0.0
+y_shift = 0.0
+
+[sub_resource type="Resource" id="Resource_n6mak"]
+script = ExtResource("1_efg8s")
+input_key = "my_hp"
+invert = true
+response_curve = SubResource("Curve_wg35a")
+
+[resource]
+script = ExtResource("1_bmit8")
+name = &"Fight Enemy"
+aggregation = 0
+considerations = Array[ExtResource("1_efg8s")]([SubResource("Resource_a68i5"), SubResource("Resource_n6mak")])

@@ -1,0 +1,59 @@
+[gd_resource type="Resource" script_class="UtilityAIBehavior" load_steps=10 format=3 uid="uid://blx02tx24uh26"]
+
+[ext_resource type="Script" path="res://addons/utility_ai/core/utility_ai_behavior.gd" id="1_l0j6b"]
+[ext_resource type="Script" path="res://addons/utility_ai/core/utility_ai_response_curve.gd" id="1_sj6ip"]
+[ext_resource type="Script" path="res://addons/utility_ai/core/utility_ai_consideration.gd" id="2_ordtw"]
+
+[sub_resource type="Curve" id="Curve_73abx"]
+_data = [Vector2(0, 0.000552779), 0.0, 0.0191984, 1, 1, Vector2(0.1, 0.00247262), 0.0191984, 0.0851432, 1, 1, Vector2(0.2, 0.0109869), 0.0851432, 0.364389, 1, 1, Vector2(0.3, 0.0474259), 0.364389, 1.35, 1, 1, Vector2(0.4, 0.182426), 1.35, 3.17575, 1, 1, Vector2(0.5, 0.5), 3.17575, 3.17574, 1, 1, Vector2(0.6, 0.817575), 3.17574, 1.35, 1, 1, Vector2(0.7, 0.952574), 1.35, 0.364389, 1, 1, Vector2(0.8, 0.989013), 0.364389, 0.0851429, 1, 1, Vector2(0.9, 0.997527), 0.0851429, 0.0191987, 1, 1, Vector2(1, 0.999447), 0.0191987, 0.0, 1, 1]
+point_count = 11
+script = ExtResource("1_sj6ip")
+curve_type = 3
+exponent = 15
+slope = 1
+x_shift = 0.0
+y_shift = 0.0
+
+[sub_resource type="Resource" id="Resource_bhykk"]
+script = ExtResource("2_ordtw")
+input_key = "distance_from_player"
+invert = true
+response_curve = SubResource("Curve_73abx")
+
+[sub_resource type="Curve" id="Curve_opbna"]
+_data = [Vector2(0, 1), 0.0, -0.0679097, 1, 0, Vector2(1, 0), -1.77763, 0.0, 0, 1]
+point_count = 2
+script = ExtResource("1_sj6ip")
+curve_type = 4
+exponent = 1
+slope = 1
+x_shift = 0.0
+y_shift = 0.0
+
+[sub_resource type="Resource" id="Resource_174df"]
+script = ExtResource("2_ordtw")
+input_key = "my_hp"
+invert = true
+response_curve = SubResource("Curve_opbna")
+
+[sub_resource type="Curve" id="Curve_2xhtq"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.10989), 0.0, 0.0, 0, 0]
+point_count = 2
+script = ExtResource("1_sj6ip")
+curve_type = 4
+exponent = 1
+slope = 1
+x_shift = 0.0
+y_shift = 0.0
+
+[sub_resource type="Resource" id="Resource_hq37o"]
+script = ExtResource("2_ordtw")
+input_key = "num_enemies_nearby"
+invert = true
+response_curve = SubResource("Curve_2xhtq")
+
+[resource]
+script = ExtResource("1_l0j6b")
+name = &"Follow Player"
+aggregation = 2
+considerations = Array[ExtResource("2_ordtw")]([SubResource("Resource_bhykk"), SubResource("Resource_174df"), SubResource("Resource_hq37o")])

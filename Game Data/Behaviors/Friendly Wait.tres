@@ -1,0 +1,43 @@
+[gd_resource type="Resource" script_class="UtilityAIBehavior" load_steps=8 format=3 uid="uid://dvhy2yoridgoe"]
+
+[ext_resource type="Script" path="res://addons/utility_ai/core/utility_ai_behavior.gd" id="1_dke6h"]
+[ext_resource type="Script" path="res://addons/utility_ai/core/utility_ai_response_curve.gd" id="1_kbjuh"]
+[ext_resource type="Script" path="res://addons/utility_ai/core/utility_ai_consideration.gd" id="2_8q5e6"]
+
+[sub_resource type="Curve" id="Curve_gmlle"]
+_data = [Vector2(0, 0.208791), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+script = ExtResource("1_kbjuh")
+curve_type = 4
+exponent = 1
+slope = 1
+x_shift = 0.0
+y_shift = 0.0
+
+[sub_resource type="Resource" id="Resource_pvx5m"]
+script = ExtResource("2_8q5e6")
+input_key = "distance_from_player"
+invert = true
+response_curve = SubResource("Curve_gmlle")
+
+[sub_resource type="Curve" id="Curve_kyqok"]
+_data = [Vector2(0, 0.230769), 0.0, 0.0, 0, 0, Vector2(0.481818, 0.197802), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+script = ExtResource("1_kbjuh")
+curve_type = 4
+exponent = 1
+slope = 1
+x_shift = 0.0
+y_shift = 0.0
+
+[sub_resource type="Resource" id="Resource_hlv2q"]
+script = ExtResource("2_8q5e6")
+input_key = "num_enemies_nearby"
+invert = true
+response_curve = SubResource("Curve_kyqok")
+
+[resource]
+script = ExtResource("1_dke6h")
+name = &"Friendly Wait"
+aggregation = 0
+considerations = Array[ExtResource("2_8q5e6")]([SubResource("Resource_pvx5m"), SubResource("Resource_hlv2q")])
